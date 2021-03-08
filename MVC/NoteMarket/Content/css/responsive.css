@@ -1,0 +1,1123 @@
+/* Mobile */
+#mobile-nav-open-btn {
+	font-size: 50px;
+	color: #6255a5;
+	cursor: pointer;
+	z-index: 2;
+	position: absolute;
+	right: 10px;
+	top: 0px;
+	/*hide*/
+	display: none;
+}
+
+.nav-header {
+	position: relative;
+}
+
+#mobile-nav {
+	/* by default mobile menu hidden */
+	height: 0%;
+	width: 100%;
+	position: fixed;
+	top: 10;
+	left: 0;
+	z-index: 3;
+	background-color: rgba(255, 255, 255, 1);
+	-webkit-transition: all 300ms linear;
+	transition: all 300ms linear;
+	overflow-y: hidden;
+}
+
+#mobile-nav-close-btn {
+	font-family: "Raleway", sans-serif;
+	font-size: 70px;
+	color: #212226;
+	font-weight: 400;
+	cursor: pointer;
+	position: absolute;
+	top: -9px;
+	right: 13px;
+	-webkit-transition: .3s;
+	transition: .3s;
+}
+
+#mobile-nav-content {
+	text-align: left;
+	width: 100%;
+	margin-top: 30px;
+	position: relative;
+	top: 10%;
+}
+
+#mobile-nav ul li {
+	margin-bottom: 20px;
+}
+
+#mobile-nav a {
+	font-family: "Raleway", sans-serif;
+	font-size: 18px;
+	color: #212226;
+	font-weight: 400;
+	text-transform: uppercase;
+	display: inline;
+	-webkit-transition: .3s;
+	transition: .3s;
+}
+
+#mobile-nav a:hover,
+#mobile-nav a:focus,
+#mobile-nav-close-btn:hover,
+#mobile-nav-close-btn:focus {
+	color: #fff;
+	background: #6255a5;
+}
+
+/* spy active */
+.white-nav-top #mobile-nav ul.nav > li.active > a {
+	color: #f4c613;
+	font-weight: 500;
+}
+
+
+
+
+/* Extra Large */
+@media (min-width: 1200px) and (max-width: 1299px) {
+
+	/*Create account*/
+	#img1 {
+		margin-top: -40px;
+	}
+}
+
+/* Large */
+@media (min-width: 992px) and (max-width: 1199px) {
+	.btns{
+		margin-left: 20px;
+	}
+	/*User Profile*/
+
+	#forminer5 h1 {
+		margin-left: -125px;
+	}
+
+	#user h1 {
+		margin-left: 0px;
+	}
+
+	.topi {
+		margin-left: -40px;
+	}
+
+	.btn1 {
+		margin-left: 20px;
+	}
+
+	/*Change pass*/
+	.topchang {
+		margin-top: 200px;
+	}
+
+	/*Contact us*/
+	#form20 {
+		margin-left: 0px;
+	}
+
+	.form-control1 {
+		width: 450px;
+	}
+
+	#form20 h4 {
+		margin-left: -95px;
+	}
+
+	#form20 h5 {
+		margin-left: -95px;
+	}
+
+	/*Login*/
+	.form-group2 a {
+		margin-left: 270px;
+	}
+
+	#img {
+		margin-top: 200px;
+	}
+
+	/*Create account*/
+	#img1 {
+		margin-top: 200px;
+	}
+
+	/*Forgot pass*/
+	#img2 {
+		margin-top: 100px;
+	}
+
+	/*Note details*/
+	.ndr img {
+		margin-left: -5%;
+		margin-top: 8%;
+	}
+
+	.nod2 h4 {
+		margin-top: -30%;
+	}
+	.ndi{
+		width:27%!important;
+	}
+	.ndst {
+		margin-left: 29%;
+		margin-top: -3%;
+	}
+
+	.nod2 p {
+		margin-left: 29%;
+		margin-top: -2%;
+	}
+
+	.nod3 {
+		padding: 10px;
+	}
+
+	.ndl2 {
+		margin-left: -15%;
+	}
+
+	/*Dash Board*/
+	.btn12 {
+		margin-left: 345px;
+	}
+
+	.dash5 i {
+		margin-left: 150px;
+		margin-top: -27px;
+	}
+
+	.dash3 i {
+		margin-left: 150px;
+		margin-top: -27px;
+	}
+
+	.dash5 input {
+		margin-left: 140px;
+		padding-left: 40px;
+	}
+
+	.dash3 input {
+		margin-left: 140px;
+		padding-left: 40px;
+	}
+
+	/*search notes*/
+	.form-iner8 {
+		margin-left: 0%;
+		margin-right: 0%
+	}
+
+	.search-under2 {
+		margin-left: -7%;
+		padding: 2px;
+
+	}
+
+	.search-under2 h1 {
+		font-size: 15px;
+	}
+
+	.search-under2 img {
+		width: 98%;
+	}
+
+	.form-iner8 {
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+
+	#st {
+		padding-top: 10px;
+		padding-left: 20px;
+		padding-right: 20px;
+		padding-bottom: 10px;
+		text-align: left;
+		margin-top: 20px;
+		margin-left: -80px;
+	}
+
+	.pagination {
+		margin-left: 500px;
+	}
+	/*add notes*/
+	.form-control6{
+		width: 930px;
+	}
+	.form-control4{
+		width: 455px;
+	}
+	.form-control3{
+		width: 455px;
+	}
+	.form-control2{
+		width: 455px;
+	}
+	#forminer12 h1{
+		margin-left: 30px;
+	}
+	.btn01{
+		margin-left: 30px;
+	}
+	/*Home*/
+	#under-home{
+		margin-left: 0%;
+		right: 0%;
+	}
+	.under-home-1{
+		margin-top: 500px;
+	}
+}
+
+/* Mediume */
+@media (min-width: 768px) and (max-width: 991px) {
+	.btns{
+		margin-left: 40px;
+	}
+	/*User profile*/
+
+	#forminer5 h1 {
+		margin-left: -120px;
+	}
+
+	#user h1 {
+		margin-left: 0px;
+	}
+
+	.topi {
+		margin-left: -50px;
+		width: 50%;
+
+	}
+
+	.nav {
+		margin-top: -40px;
+		margin-left: 28px;
+	}
+
+	#forminer5 {
+		padding: 0px;
+	}
+
+	.btn1 {
+		margin-left: 30px;
+	}
+
+	/*Change pass*/
+	.topchang {
+		margin-top: 80px;
+	}
+
+	/*Contact us*/
+	#form20 {
+		margin-left: -120px;
+	}
+
+	.form-control1 {
+		width: 330px;
+	}
+
+	#form20 h4 {
+		margin-left: -95px;
+	}
+
+	#form20 h5 {
+		margin-left: -95px;
+	}
+
+	/*Login*/
+	.form-group2 a {
+		margin-left: 270px;
+	}
+
+	#img {
+		margin-top: 100px;
+	}
+
+	/*Create account*/
+	#img1 {
+		margin-top: 100px;
+	}
+
+	/*Forgot pass*/
+	#img2 {
+		margin-top: 50px;
+	}
+
+	/*Note details*/
+
+	.ndr1 h1 {
+		margin-top: 15%
+	}
+
+	.ndr1 p {
+		margin-top: 5%;
+		font-size: 17px;
+		margin-bottom: 10%
+	}
+
+	.ndr1 h4 {
+		font-size: 20px;
+		margin-top: 5%
+	}
+
+	.lmt {
+		margin-top: -7%
+	}
+
+	.ndl2 {
+		margin-top: 5%
+	}
+
+	.nod2 h4 {
+		margin-top: -48%;
+		margin-left: 40%;
+	}
+
+	.ndst {
+		margin-left: 40%;
+		margin-top: -3%;
+	}
+
+	.nod2 p {
+		margin-left: 42%;
+		margin-top: -2%;
+	}
+
+	.ndl h3 {
+		margin-left: -110%;
+	}
+
+	.ndl1 {
+		margin-top: -84%;
+		text-align: right;
+	}
+	.ndi{
+		width: 40% !important;
+	}
+	/*Dash Board*/
+	.btn12 {
+		margin-left: 230px;
+	}
+
+	.dash5 i {
+		margin-left: 40px;
+		margin-top: 10px;
+	}
+
+	.dash3 i {
+		margin-left: 40px;
+		margin-top: 10px;
+	}
+
+	.dash5 input {
+		margin-left: -30px;
+		padding-left: 40px;
+	}
+
+	.dash3 input {
+		margin-left: -30px;
+		padding-left: 40px;
+	}
+
+	/*Search notes*/
+	.form-iner8 {
+		margin-left: 0%;
+		margin-right: 8%
+	}
+
+	.pagination {
+		margin-left: 42%;
+	}
+	/*add notes*/
+	.form-control6{
+		width: 720px;
+	}
+	.form-control4{
+		width: 350px;
+	}
+	.form-control3{
+		width: 350px;
+	}
+	.form-control2{
+		width: 350px;
+	}
+	#forminer12 h1{
+		margin-left: 30px;
+	}
+	.btn01{
+		margin-left: 30px;
+	}
+	/*Home*/
+	#under-home{
+		margin-left: 0%;
+		right: 0%;
+	}
+	.under-home-1{
+		margin-top: 350px;
+	}
+	#statment1 .topi{
+		width: 22%;
+	}
+	.how{
+		margin-left: 0px;
+	}
+	.btn-7{
+		margin-left: 320px;
+		margin-top: -20px;
+	}
+}
+
+/*  small */
+@media (max-width: 767px) and (min-width: 577px) {
+	#mobile-nav-open-btn {
+		display: block;
+	}
+
+	/*User profile*/
+	#forminer5 {
+		padding: 0px;
+	}
+
+	.btn1 {
+		margin-left: 20px;
+	}
+
+	#forminer5 h1 {
+		margin-left: -120px;
+	}
+
+	#user h1 {
+		margin-left: 0px;
+	}
+
+	/*Change pass*/
+	.topchang {
+		margin-top: 0px;
+	}
+
+	/*Contact us*/
+	#form20 {
+		margin-left: -100px;
+	}
+
+	.form-control1 {
+		width: 500px;
+	}
+
+	#form20 h4 {
+		margin-left: -120px;
+	}
+
+	#form20 h5 {
+		margin-left: -120px;
+	}
+
+	/*Login*/
+	.form-group2 a {
+		margin-left: 270px;
+	}
+
+	/*Create account*/
+	#img1 {
+		margin-top: -40px;
+	}
+
+	/*Forgot pass*/
+	#img2 {
+		margin-top: -30px;
+	}
+
+	/*Note details*/
+	.ndr1 {
+		margin-top: -60%;
+		margin-left: 300px;
+	}
+
+	.ndl1 {
+		margin-top: -52%;
+		text-align: center justify-all;
+	}
+
+	.ndl2 {
+		margin-left: 240px;
+	}
+
+	.ndl {
+		margin-top: 10%;
+		margin-left: 20px;
+	}
+
+	.lmt {
+		margin-top: -7%;
+	}
+
+	.nod2 h4 {
+		margin-top: -21%;
+		margin-left: 30%;
+	}
+
+	.ndst {
+		margin-left: 30%;
+		margin-top: -2%;
+	}
+
+	.nod2 p {
+		margin-left: 30%;
+		margin-top: 2%;
+	}
+
+	.nod3 {
+		padding: 10px;
+		margin-left: 5%;
+	}
+
+	.line2 {
+		margin-top: 10%
+	}
+
+	/*Dash Board*/
+	.btn12 {
+		margin-left: 440px;
+	}
+
+	.dash5 i {
+		margin-left: 240px;
+		margin-top: -30px;
+	}
+
+	.dash3 i {
+		margin-left: 240px;
+		margin-top: -30px;
+	}
+
+	.dash5 input {
+		margin-left: 230px;
+		padding-left: 40px;
+	}
+
+	.dash3 input {
+		margin-left: 230px;
+		padding-left: 40px;
+	}
+
+	/*search notes*/
+	.form-iner8 {
+		margin-left: 2%;
+		margin-right: 1%
+	}
+
+	#st {
+		margin-left: 0%;
+	}
+
+	.search-under2 img {
+		width: 105%;
+	}
+
+	.pagination {
+		margin-left: 200px;
+	}
+
+	.field-icon2 {
+		padding-bottom: 15px;
+	}
+
+	.img-rd {
+		margin-left: 110px;
+	}
+
+	.re {
+		margin-left: 110px;
+		margin-top: -25px;
+	}
+	/*add notes*/
+	.form-control6{
+		width: 550px;
+	}
+	.form-control4{
+		width: 550px;
+	}
+	.form-control3{
+		width: 550px;
+	}
+	.form-control2{
+		width: 550px;
+	}
+	#forminer12 h1{
+		margin-left: 15px;
+	}
+	.btn01{
+		margin-left: 15px;
+	}
+	/*Home*/
+	#under-home{
+		margin-left: 0%;
+		right: 0%;
+	}
+	.under-home-1{
+		margin-top: 250px;
+	}
+	.how{
+		margin-left: 0px;
+	}
+}
+
+/*Extrasmall devices*/
+@media (max-width: 576px) and (min-width: 371px) {
+	.btns{
+		margin-left: 20px;
+	}
+	#mobile-nav-open-btn {
+		display: block;
+	}
+
+	/*User profile*/
+
+	#forminer5 {
+		padding: 0px;
+	}
+
+	#forminer5 h1 {
+		margin-left: -120px;
+	}
+
+	.btn1 {
+		margin-left: 20px;
+	}
+
+	.form-control2 {
+		width: 300px;
+	}
+
+	#user h1 {
+		margin-left: 0px;
+	}
+
+	/*Change pass*/
+	.topchang {
+		margin-top: 100px;
+		margin-left: 70px;
+	}
+
+	#forminer {
+		padding-left: 50px;
+
+	}
+
+	#form1 {
+		left: 70%;
+		margin-top: 200px;
+	}
+
+	/*Contact us*/
+	.form-control1 {
+		width: 350px;
+	}
+
+	#form20 {
+		padding-left: 0px;
+	}
+
+	#form20 h4 {
+		margin-left: -120px;
+	}
+
+	#form20 h5 {
+		margin-left: -120px;
+	}
+
+	/*Login*/
+	.form-group2 a {
+		margin-left: 270px;
+	}
+
+	#img {
+		margin-top: 120px;
+		margin-left: 50px;
+	}
+
+	/*Create account*/
+	#img1 {
+		margin-top: 0px;
+		margin-left: 20px;
+	}
+
+	#form4 {
+		left: 65%;
+		margin-top: 50px;
+	}
+
+	/*Forgot pass*/
+	#img2 {
+		margin-top: 170px;
+		margin-left: 50px;
+	}
+
+	#forminer2 {
+		margin-left: 150px;
+		padding: 0px;
+	}
+
+	#form2 {
+		margin-top: 200px;
+	}
+
+	/*note details*/
+	.ndl1 {
+		margin-top: -285px;
+	}
+
+	.ndl2 {
+		margin-top: 20px;
+	}
+
+	.lmt {
+		margin-top: -20px;
+	}
+
+	.nod2 {
+		margin-top: 20px;
+		margin-left: -10px;
+	}
+
+	.nod2 h4 {
+		margin-top: -120px;
+		margin-left: 110px;
+	}
+
+	.ndst {
+		margin-top: -10px;
+		margin-left: 110px;
+	}
+
+	.nod2 p {
+		margin-left: 110px;
+	}
+
+	.ndi {
+		margin-left: -10px;
+		width: 30% !important;
+	}
+
+	/*FAQ*/
+	#tech-statment1 h3 {
+		font-size: 30px;
+	}
+
+	/*Dash Board*/
+	.btn12 {
+		margin-left: 250px;
+	}
+
+	.dash5 i {
+		margin-left: 20px;
+		margin-top: 10px;
+	}
+
+	.dash3 i {
+		margin-left: 20px;
+		margin-top: 10px;
+	}
+
+	.dash5 input {
+		margin-left: -35px;
+		padding-left: 40px;
+	}
+
+	.dash3 input {
+		margin-left: -35px;
+		padding-left: 40px;
+	}
+
+	.pagination {
+		margin-left: 70px;
+	}
+
+	/*Search notes*/
+	.search-under2 img {
+		width: 110%;
+		margin-left: -20px;
+	}
+
+	.form-iner8 {
+		margin-left: 0%;
+		margin-right: 0%;
+		padding-top: 2%;
+		padding-bottom: 2%;
+		padding-left: 2%;
+		padding-right: 2%;
+	}
+
+	#st {
+		margin-left: 10px;
+	}
+	/*add notes*/
+	.form-control6{
+		width: 340px;
+	}
+	.form-control4{
+		width: 340px;
+	}
+	.form-control3{
+		width: 340px;
+	}
+	.form-control2{
+		width: 340px;
+	}
+	#forminer12 h1{
+		margin-left: 15px;
+	}
+	.btn01{
+		margin-left: 15px;
+	}
+	/*Home*/
+	#under-home{
+		margin-left: 0%;
+		right: 0%;
+	}
+	.under-home-1{
+		margin-top: 290px;
+	}
+	.how{
+		margin}
+}
+
+/*smallest devices*/
+@media (max-width: 370px) {
+	#mobile-nav-open-btn {
+		display: block;
+	}
+
+	/*User profile*/
+
+	#forminer5 {
+		padding: 0px;
+	}
+
+	#forminer5 h1 {
+		margin-left: -120px;
+	}
+
+	.btn1 {
+		margin-left: 20px;
+	}
+
+	.form-control2 {
+		width: 300px;
+	}
+
+	#user h1 {
+		margin-left: 0px;
+	}
+
+	/*Change pass*/
+	.topchang {
+		margin-top: 100px;
+		margin-left: 70px;
+	}
+
+	#forminer {
+		padding-left: 50px;
+
+	}
+
+	#form1 {
+		left: 75%;
+		margin-top: 200px;
+	}
+
+	/*Contact us*/
+	.form-control1 {
+		width: 250px;
+	}
+
+	#form20 {
+		padding-left: 0px;
+	}
+
+	#form20 h4 {
+		margin-left: -120px;
+	}
+
+	#form20 h5 {
+		margin-left: -120px;
+	}
+
+	/*Login*/
+	.form-group2 a {
+		margin-left: 270px;
+	}
+
+	#img {
+		margin-top: 120px;
+		margin-left: 50px;
+	}
+
+	/*Create account*/
+	#img1 {
+		margin-top: 0px;
+		margin-left: 20px;
+	}
+
+	#form4 {
+		left: 75%;
+		margin-top: 80px;
+	}
+
+	/*Forgot pass*/
+	#img2 {
+		margin-top: 150px;
+		margin-left: 80px;
+	}
+
+	#forminer2 {
+		margin-left: 200px;
+		padding: 0px;
+	}
+
+	#form2 {
+		margin-top: 200px;
+	}
+
+	/*note details*/
+	.ndl1 {
+		margin-top: -285px;
+	}
+
+	.ndl2 {
+		margin-top: 20px;
+	}
+
+	.lmt {
+		margin-top: -20px;
+	}
+
+	.nod2 {
+		margin-top: 20px;
+		margin-left: -10px;
+	}
+
+	.nod2 h4 {
+		margin-top: -120px;
+		margin-left: 110px;
+	}
+
+	.ndst {
+		margin-top: -10px;
+		margin-left: 110px;
+	}
+
+	.nod2 p {
+		margin-left: 110px;
+	}
+
+	.ndi {
+		margin-left: -10px;
+		width: 40% !important;
+	}
+
+	/*FAQ*/
+	#tech-statment1 h3 {
+		font-size: 30px;
+		margin-right: 40px;
+	}
+
+	/*Dash Board*/
+	.btn12 {
+		margin-left: 250px;
+	}
+
+	.dash5 i {
+		margin-left: 20px;
+		margin-top: 10px;
+	}
+
+	.dash3 i {
+		margin-left: 20px;
+		margin-top: 10px;
+	}
+
+	.dash5 input {
+		margin-left: -35px;
+		padding-left: 40px;
+	}
+
+	.dash3 input {
+		margin-left: -35px;
+		padding-left: 40px;
+	}
+
+	.pagination {
+		margin-left: 60px;
+	}
+
+	.dash2 {
+		margin-left: 50px;
+	}
+
+	/*Search notes*/
+	.search-under2 img {
+		width: 100%;
+		margin-left: 0px;
+	}
+
+	.form-iner8 {
+		margin-left: 0%;
+		margin-right: 0%;
+		padding-top: 2%;
+		padding-bottom: 2%;
+		padding-left: 0%;
+		padding-right: 0%;
+	}
+
+	#st {
+		margin-left: 10px;
+	}
+	/*add notes*/
+	.form-control6{
+		width: 320px;
+	}
+	.form-control4{
+		width: 320px;
+	}
+	.form-control3{
+		width: 320px;
+	}
+	.form-control2{
+		width: 320px;
+	}
+	#forminer12 h1{
+		margin-left: 15px;
+	}
+	.btn01{
+		margin-left: 15px;
+	}
+	/*Home*/
+	#under-home{
+		margin-left: 0%;
+		right: 0%;
+	}
+	.under-home-1{
+		margin-top: 270px;
+	}
+	.cust h3{
+		margin-left: 140px;
+		margin-top: -100px;
+	}
+	.cust h4{
+		margin-left: 140px;
+		margin-top: -10px;
+	}
+	.btns{
+		margin-left: 20px;
+	}
+}

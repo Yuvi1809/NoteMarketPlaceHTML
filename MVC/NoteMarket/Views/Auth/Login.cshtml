@@ -1,0 +1,51 @@
+﻿@model NoteMarket.Models.MembersData
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section id="login">
+    <div class="container">
+        <!-- Background img -->
+        <img id="bg-img" src="~/images/pre-login/banner-with-overlay.jpg" alt="back image" style="border-radius: 0%; ">
+        <!-- Overlay -->
+        <div id="login-overlay"></div>
+        <!-- top img -->
+        <img id="img" src="~/images/pre-login/top-logo.png" alt="top img" style="border-radius: 0%">
+        <!-- form -->
+        <div id="form1">
+            <form action="/Auth/Login" method="post">
+                <div id="forminer" style="margin-top: 20px;">
+                    <h1>Login</h1>
+                    <p class="pa">Enter your email address and password to login</p>
+                    <div class="form-group1">
+                        @Html.LabelFor(m => m.EmailId)
+                        @Html.EditorFor(m => m.EmailId, new { htmlAttributes = new { @class = "form-control", placeholder = "notesmarkplace77@gmail.com" } })
+                        @Html.ValidationMessageFor(m => m.EmailId, "", new { @class = "error" })
+                    </div>
+
+                    <div class="form-group2">
+                        @Html.LabelFor(m => m.Password)<a href="/Auth/Forgot">Forgot Password?</a>
+                        @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @id = "password-field", @class = "form-control", placeholder = "Enter your password" } })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error" })
+                        <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                    </div>
+
+
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+                    </div>
+                    <button>LOGIN</button>
+                    <div class="bottom">
+                        <p>Don't have an account?<a href="/Auth/Registration">Sign Up</a></p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    @if (TempData["Success"] != null)
+    {
+        <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
+    }
+
+</section>

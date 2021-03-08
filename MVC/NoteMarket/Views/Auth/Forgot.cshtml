@@ -1,0 +1,38 @@
+﻿@model NoteMarket.Models.MembersData
+@{
+    ViewBag.Title = "Forgot";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="forgot">
+    <!-- Background img -->
+    <img id="bg-img" src="~/images/pre-login/banner-with-overlay.jpg" alt="back image">
+    <!-- Overlay -->
+    <div id="login-overlay"></div>
+    <!-- top img -->
+    <img id="img2" src="~/images/pre-login/top-logo.png" alt="top img">
+    <div id="form2" action="/Auth/Forgot" method="post">
+        <form action="/Auth/Forgot" method="post">
+            <div id="forminer2">
+
+                <h1>Forgot Password</h1>
+                <p class="pa">Enter your email address and password to login</p>
+                <div class="form-group1">
+
+                    @Html.LabelFor(m => m.EmailId)
+                    @Html.EditorFor(m => m.EmailId, new { htmlAttributes = new { @class = "form-control", placeholder = "notesmarkplace77@gmail.com" } })
+                    @Html.ValidationMessageFor(m => m.EmailId, "", new { @class = "error" })
+
+                </div>
+                <button type="submit">SUBMIT</button>
+            </div>
+        </form>
+    </div>
+    @if (TempData["Success"] != null)
+    {
+        <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
+    }
+
+
+</section>
+

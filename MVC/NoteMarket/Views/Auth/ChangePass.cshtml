@@ -1,0 +1,51 @@
+﻿
+@model NoteMarket.Models.ChangePassModel
+@{
+    ViewBag.Title = "ChangePass";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="changepass">
+
+    <!-- Background img -->
+    <img id="bg-img" src="~/images/pre-login/banner-with-overlay.jpg" alt="back image">
+    <!-- Overlay -->
+    <div id="login-overlay"></div>
+    <!-- top img -->
+    <img id="img" src="~/images/pre-login/top-logo.png" alt="top img" class="topchang">
+    <!-- form -->
+    <div id="form1">
+        <form action="/Auth/ChangePass" method="post">
+            <div id="forminer">
+                <h1>Change Password</h1>
+                <p class="pa">Enter your new password to change your password</p>
+                <div class="form-group1">
+                   
+                    @Html.LabelFor(m => m.OldPassword)
+                    @Html.EditorFor(m => m.OldPassword, new { htmlAttributes = new { @id = "password-field", @class = "form-control", placeholder = "Enter your Old password" } })
+                    @Html.ValidationMessageFor(m => m.OldPassword, "", new { @class = "error" })
+                    <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                </div>
+                <div class="form-group5">
+                    <label>New </label>
+                    @Html.LabelFor(m => m.NewPassword)
+                    @Html.EditorFor(m => m.NewPassword, new { htmlAttributes = new { @id = "password-field", @class = "form-control", placeholder = "Enter your New password" } })
+                    @Html.ValidationMessageFor(m => m.NewPassword, "", new { @class = "error" })
+                    <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                </div>
+                  
+                <div class="form-group6">
+                    @Html.LabelFor(m => m.CPassword)
+                    @Html.EditorFor(m => m.CPassword, new { htmlAttributes = new { @id = "password-field", @class = "form-control", placeholder = "Enter your Confirm password" } })
+                    @Html.ValidationMessageFor(m => m.CPassword, "", new { @class = "error" })
+                    <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                </div>
+
+
+                <button type="submit">SUBMIT</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+

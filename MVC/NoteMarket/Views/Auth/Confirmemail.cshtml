@@ -1,0 +1,23 @@
+﻿@model NoteMarket.Models.MembersData
+@{
+    ViewBag.Title = "Confirmemail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="conf">
+    <!-- Background img -->
+    <img id="bg-img" src="~/images/pre-login/banner-with-overlay.jpg" alt="back image">
+    <!-- Overlay -->
+    <div id="login-overlay"></div>
+    <form action="/Auth/Confirmemail" method="post">
+        <div class="form6">
+            <!-- top img -->
+            <img src="~/images/home/logo.png" alt="top img">
+            <h1>Email Verification</h1>
+            <h2>Dear ,</h2>
+            <h3>Thankyou for Signup!</h3>
+            <h3>Simply click below for email verification</h3>
+            <a class="btn-general">VERIFY EMAIL ADDRESS</a>
+        </div>
+    </form>
+</section>

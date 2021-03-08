@@ -1,0 +1,223 @@
+﻿@model NoteMarket.Models.SearchNotes
+@{
+    IEnumerable<NoteMarket.Models.Category> category = ViewData["Category"] as IEnumerable<NoteMarket.Models.Category>;
+    IEnumerable<NoteMarket.Models.Country> country = ViewData["Country"] as IEnumerable<NoteMarket.Models.Country>;
+    IEnumerable<NoteMarket.Models.Type> type = ViewData["Type"] as IEnumerable<NoteMarket.Models.Type>;
+    IEnumerable<NoteMarket.Models.Rating> rate = ViewData["Rate"] as IEnumerable<NoteMarket.Models.Rating>;
+    IEnumerable<NoteMarket.Models.NoteDetail> course = ViewData["Course"] as IEnumerable<NoteMarket.Models.NoteDetail>;
+    IEnumerable<NoteMarket.Models.NoteDetail> university = ViewData["University"] as IEnumerable<NoteMarket.Models.NoteDetail>;
+    IEnumerable<NoteMarket.Models.NoteDetail> note = ViewData["Note"] as IEnumerable<NoteMarket.Models.NoteDetail>;
+
+    ViewBag.Title = "SearchNotes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--Logo-->
+<div class="container">
+    <a href="#user" class="navbar-brand smooth-scroll">
+        <img src="~/images/home/logo.png" alt="top logo" class="topi" style="border-radius: 0%">
+    </a>
+    <div class="container">
+        <nav class="navbar navbar-fixed-top">
+
+            <!-- Mobile Menu Open Button -->
+            <span id="mobile-nav-open-btn">&#9776;</span>
+            <!-- Logo -->
+            <!-- Mobile Menu -->
+            <div id="mobile-nav">
+                <!-- open -->
+                <span id="mobile-nav-close-btn">&times;</span>
+
+                <div id="mobile-nav-content">
+                    <ul class="nav">
+                        <li><a class="smooth-scroll" href="/NoteDetails/SearchNotes">Search Notes</a></li>
+                        <li><a class="smooth-scroll" href="#SellYourNotes">Sell Your Notes</a></li>
+                        <li><a class="smooth-scroll" href="/Auth/FAQ">FAQ</a></li>
+                        <li><a class="smooth-scroll" href="/Auth/ContactUs">ContactUs</a></li>
+                        <li> <a class="btn">LogOut</a> </li>
+                    </ul>
+                </div>
+            </div>
+
+        </nav>
+        <div class="collapse navbar-collapse" style="margin-top: 10px;">
+            <ul class="nav navbar-nav pull-right">
+                <li><a class="smooth-scroll" href="/NoteDetails/SearchNotes" style="color: black">Search Notes</a></li>
+                <li><a class="smooth-scroll" href="#SellYourNotes" style="color: black">Sell Your Notes</a></li>
+                <li><a class="smooth-scroll" href="/Auth/FAQ" style="color: black">FAQ</a></li>
+                <li><a class="smooth-scroll" href="/Auth/ContactUs" style="color: black">ContactUs</a></li>
+                <li> <a class="btn">Logout</a> </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--profile pic-->
+<div id="statment">
+    <div class="content-box-lg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 wow  wow fadeInUp">
+                    <div id="tech-statment" class="text-center">
+                        <h3>Search Notes</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<body>
+
+    <section id="searchnotes">
+        <div class="search-under1">
+            <h1>Search And Filter notes</h1>
+            <form action="/NoteDetails/SearchNotes" method="post">
+                <div class="form-iner8">
+                    <input type="search"style="padding-left:25px;" name="searchn" placeholder="Search notes here" class="form-control" onchange='this.form.submit()'>
+                    <span toggle="#search" class="fa fa-search field-icon1"></span>
+                    <noscript><input type="submit" value="submit"></noscript>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-4">
+
+
+                                <select id="st" name="type">
+                                    <option value="">Select Type</option>
+                                    @foreach (NoteMarket.Models.Type type1 in type)
+                                    {
+                                        <option value="@type1.Type1">@type1.Type1</option>
+                                    }
+                                </select>
+
+
+                            </div>
+                            <div class="col-md-2 col-sm-4">
+
+
+                                <select id="st" name="category">
+                                    <option value="">Select category</option>
+
+                                    @foreach (NoteMarket.Models.Category category1 in category)
+                                    {
+                                        <option value="@category1.Category1">@category1.Category1</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-2 col-sm-4">
+
+                                <select name="select University" id="st">
+                                    <option value="st3">Select University</option>
+                                    @foreach (NoteMarket.Models.NoteDetail university1 in university)
+                                    {
+                                        <option value="@university1.University">@university1.University</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-2 col-sm-4">
+
+                                <select name="course" id="st">
+                                    <option>Select Course</option>
+                                    @foreach (NoteMarket.Models.NoteDetail course1 in course)
+                                    {
+                                        <option value="@course1.Course">@course1.Course</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-2 col-sm-4">
+
+
+                                <select id="st" name="country">
+                                    <option value="">Select country</option>
+                                    @foreach (NoteMarket.Models.Country country1 in country)
+                                    {
+                                        <option value="@country1.Country1">@country1.Country1</option>
+                                    }
+                                </select>
+
+                            </div>
+                            <div class="col-md-2 col-sm-4">
+
+                                <select name="rate" id="st">
+                                    <option value="">Select rating</option>
+                                    @foreach (NoteMarket.Models.Rating rating1 in rate)
+                                    {
+                                        <option value="@rating1.Rate">@rating1.Rate</option>
+                                    }
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+            <!-- notes -->
+            <div class="search-under2">
+                <h1>Total 18 notes</h1>
+                <div class="bo">
+                    <div class="container">
+                        <div class="row">
+                            @foreach (var note1 in note)
+                            {
+                                <div class="col-md-4 col-sm-6">
+                                    <img src=@Url.Content(@note1.DisplayPic) alt="img">
+                                    <h1 name="note">@note1.NoteTitle</h1>
+                                    <span class="fa fa-university field-icon2"></span>
+                                    <p class="te">@note1.University,@note1.Country</p>
+                                    <span class="fa fa-book field-icon2"></span>
+                                    <p class="te">@note1.NoOfPages</p>
+                                    <span class="fa fa-calendar field-icon2"></span>
+                                    <p class="te">@note1.ApprovedDate</p>
+                                    <span class="fa fa-flag field-icon2"></span>
+                                    <p class="img-rd">5 Users marked this note as inappropriate</p>
+                                    <i class="fa fa-star fil1"></i>
+                                    <i class="fa fa-star fil1"></i>
+                                    <i class="fa fa-star fil1"></i>
+                                    <i class="fa fa-star fil1"></i>
+                                    <i class="fa fa-star fil1"></i>
+                                    <p class="re">100Reviews</p>
+                                </div>
+                            }
+
+                        </div>
+                        <!--slider-->
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item"><a class="page-link btn-pagination" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                            <li class="page-item"><a class="page-link" href="#">5</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="container">
+                            <div class="under-search-3">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p>
+                                            Copyright &copy; Tatvasoft Allrights Reserved
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <ul class="social-list pull-righ">
+                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    </section>
+
+</body>
+

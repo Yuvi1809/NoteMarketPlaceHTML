@@ -4,8 +4,7 @@
     ViewBag.Title = "ChangePass";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<section id="changepass">
+    <section id="changepass">
 
     <!-- Background img -->
     <img id="bg-img" src="~/images/pre-login/banner-with-overlay.jpg" alt="back image">
@@ -40,12 +39,8 @@
                     @Html.ValidationMessageFor(m => m.CPassword, "", new { @class = "error" })
                     <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                 </div>
-
-
                 <button type="submit">SUBMIT</button>
             </div>
         </form>
     </div>
 </section>
-
-

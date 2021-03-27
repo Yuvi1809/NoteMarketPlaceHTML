@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using NoteMarket.Models;
 using System.Net;
 using System.Net.Mail;
-
+using System.IO;
 
 namespace NoteMarket.Controllers
 {
@@ -19,15 +19,17 @@ namespace NoteMarket.Controllers
             return View();
         }
 
+        //Home
+        public ActionResult HOME()
+        {
 
+            return View();
+        }
         //Login
         [HttpGet]
         public ActionResult Login()
         {
-            if (Session["Id"] != null)
-            {
-                return RedirectToAction("Login", "Auth", new { Id = Session["Id"].ToString() });
-            }
+            
             return View();
         }
         [HttpPost]
@@ -39,9 +41,9 @@ namespace NoteMarket.Controllers
                 MembersData usr = db.MembersDatas.Where(u => u.EmailId == ml.EmailId && u.Password == ml.Password).FirstOrDefault();
                 if (usr != null)
                 {
-                    Session["Id"] = usr.Id.ToString();
+                    Session["Id"] = usr.Id;
                     TempData["Success"] = "Loggin Successfully!";
-                    return RedirectToAction("Registration", "Auth");
+                    return RedirectToAction("SearchNotes", "NoteDetails");
                 }
                 else
                 {
@@ -51,6 +53,7 @@ namespace NoteMarket.Controllers
                 }
 
             }
+
         }
 
         //Registration
@@ -71,7 +74,27 @@ namespace NoteMarket.Controllers
             {
 
                 db.SaveChanges();
-      
+                var verifyUrl = "/Auth/ConfirmEmail?Email=" + md.EmailId;
+                var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
+
+                var fromemail = new MailAddress("noteamarketplace@gmail.com");
+                var toemail = new MailAddress(md.EmailId);
+                MailMessage mm = new MailMessage("noteamarketplace@gmail.com", md.EmailId);
+                mm.Subject = "  Note Marketplace - Email Verification ";
+                mm.IsBodyHtml = true;
+                mm.Body = "<a'"+link+"'>"+link+"</a>";
+
+
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.EnableSsl = true;
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new NetworkCredential(fromemail.Address, "Note@tatva");
+
+                smtp.Send(mm);
                 TempData["Success"] = "Registration Successfully Done!";
                return RedirectToAction("Login", "Auth");
             }
@@ -139,18 +162,58 @@ namespace NoteMarket.Controllers
 
         //ConfirmEmailid
         [HttpGet]
-        public ActionResult ConfirmEmail()
+        public ActionResult ConfirmEmail(string Email)
         {
-            return View();
+            using (projectEntities1 db = new projectEntities1())
+            {
+
+                MembersData usr = db.MembersDatas.Where(u => u.EmailId == Email).FirstOrDefault();
+                usr.IsEmailVerified = true;
+                usr.CPassword = "123";
+                db.SaveChanges();
+                return View(usr);
+            }
         }
        
         //ForgotPassword
         [HttpGet]
         public ActionResult ChangePass()
-        {
+        { 
             return View();
         }
-        
+        [HttpPost]
+        public ActionResult ChangePass(ChangePassModel cpm)
+        {
+            if (Session["Id"] != null)
+            {
+                int id = Convert.ToInt32(Session["Id"].ToString());
+                using (projectEntities1 db = new projectEntities1())
+                {
+                    MembersData usr = db.MembersDatas.Where(u => u.Id == id).FirstOrDefault();
+                    {
+                        if (cpm.OldPassword == usr.Password)
+                        {
+                            usr.CPassword = cpm.CPassword;
+                            usr.Password = cpm.CPassword;
+                            db.SaveChanges();
+                            TempData["Success"] = "Password  Successfully Changed!";
+                            return RedirectToAction("Login", "Auth");
+                        }
+                        else
+                        {
+                            TempData["Success"] = "OldPassword miss match";
+                            return RedirectToAction("Registration", "Auth");
+                        }
+
+                    }
+                }
+             }
+            else
+            {
+                return RedirectToAction("Forgot", "Auth");
+            }
+        }
+
         //FAQ
         [HttpGet]
         public ActionResult FAQ()
@@ -196,6 +259,64 @@ namespace NoteMarket.Controllers
             TempData["Success"] = "Email sent Successfully Done!";
             return RedirectToAction("ContactUs", "Auth");
         }
+
+        //ContactUs
+        public ActionResult UserProfile(UserProfileModal userProfile)
+        {
+            int id = Convert.ToInt32(Session["Id"].ToString());
+            using (projectEntities1 db = new projectEntities1())
+            {
+                MembersData usr = db.MembersDatas.Where(u => u.Id == id).FirstOrDefault();
+                {
+                    userProfile.FirstName = usr.FirstName;
+                    userProfile.LastName = usr.LastName;
+                    userProfile.EmailId = usr.EmailId;
+
+                    return View(userProfile);
+                }
+            }
+        }
+        [HttpPost]
+        public ActionResult UserProfile(UserProfileModal userProfile, HttpPostedFileBase dp)
+        {
+         if(Session["Id"] != null)
+            {
+                int id = Convert.ToInt32(Session["Id"].ToString());
+                using (projectEntities1 db = new projectEntities1())
+                {
+                    MembersData usr = db.MembersDatas.Where(u => u.Id == id).FirstOrDefault();
+                    {
+                        string fileName = Path.GetFileName(dp.FileName);
+                        userProfile.uploaddp= "~/images/" + fileName;
+                        fileName = Path.Combine(Server.MapPath("~/images/"), fileName);
+                        dp.SaveAs(fileName);
+                        
+                        usr.AddLine1 = userProfile.add1;
+                        usr.Addline2 = userProfile.add2;
+                        usr.City = userProfile.city;
+                        usr.Collage = userProfile.collage;
+                        usr.Country = userProfile.country;
+                        usr.State = userProfile.state;
+                        usr.University = userProfile.university;
+                        usr.ZipCode = userProfile.zipcode;
+                        usr.DOB = userProfile.bdate;
+                        usr.PhoneNo = userProfile.phone;
+                        usr.IsDetailsSubmitted = true;
+                        usr.CPassword = "123";
+                        
+                        usr.Gender = "Male";
+                        
+                        usr.ProfilePicture = userProfile.uploaddp;
+                        db.SaveChanges();
+                        return View();
+                    }
+                }
+            }
+            else
+            {
+                return View();
+            }
+        }
     }
-    
+
 }

@@ -1,4 +1,4 @@
-﻿
+﻿@Model NoteMarket.Models.Seller
 @{
     ViewBag.Title = "BuyReq";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -73,8 +73,7 @@
         </div>
     </div>
 </div>
-</head>
-<body>
+
     <section id="buyerreq">
         <div class="fancy-line" style="margin-bottom: 20px;">
             <hr class="line1">
@@ -112,15 +111,18 @@
                     </tbody>
                     <tbody>
                         <tr>
-                            <th scope="row">1</th>
-                            <td style="color: #6255a5">Data Science</td>
-                            <td>Science</td>
-                            <td>testing123@gmail.com</td>
-                            <td>+91 9874563527</td>
-                            <td>paid</td>
-                            <td>$250</td>
-                            <td>27 nov 2020, 11:24:34 </td>
-                            <td><img src="~/images/Dashboard/eye.png"></td>
+                            @*@foreach (NoteMarket.Models.Seller s1 in Model) 
+                            {*@
+                             if (Model.NoteDetail.SellFor == true)
+                             { <th scope="row">1</th>
+                            <td style="color: #6255a5">@Model.NoteDetail.NoteTitle</td>
+                            <td>@Model.NoteDetail.Course</td>
+                            <td>@Model.MembersData.EmailId</td>
+                            <td>@Model.MembersData.PhoneNo</td>
+                            <td>@Model.NoteDetail.SellFor</td>
+                            <td>@Model.NoteDetail.SellPrice</td>
+                            <td>@Model.NoteDetail.ApprovedDate </td>
+                            <td><img src="/images/Dashboard/eye.png"></td>
                             <td>
                                 <div class="dropdown">
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -128,7 +130,8 @@
 
                                     </div>
                                 </div>
-                            </td>
+                            </td>}
+                             }
                         </tr>
                         <tr>
                             <th scope="row">2</th>

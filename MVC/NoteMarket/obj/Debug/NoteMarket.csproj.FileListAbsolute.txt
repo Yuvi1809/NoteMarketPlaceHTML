@@ -81,3 +81,7 @@ C:\Users\Dhruvin\Desktop\NoteMarket\obj\Debug\NoteMarket.csproj.CoreCompileInput
 C:\Users\Dhruvin\Desktop\NoteMarket\obj\Debug\NoteMarket.csproj.CopyComplete
 C:\Users\Dhruvin\Desktop\NoteMarket\obj\Debug\NoteMarket.dll
 C:\Users\Dhruvin\Desktop\NoteMarket\obj\Debug\NoteMarket.pdb
+C:\Users\Dhruvin\Desktop\NoteMarket\bin\PagedList.dll
+C:\Users\Dhruvin\Desktop\NoteMarket\bin\PagedList.Mvc.dll
+C:\Users\Dhruvin\Desktop\NoteMarket\bin\PagedList.xml
+C:\Users\Dhruvin\Desktop\NoteMarket\bin\PagedList.Mvc.xml

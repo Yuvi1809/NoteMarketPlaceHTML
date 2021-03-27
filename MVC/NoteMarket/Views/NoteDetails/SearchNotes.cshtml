@@ -1,4 +1,4 @@
-﻿@model NoteMarket.Models.SearchNotes
+﻿
 @{
     IEnumerable<NoteMarket.Models.Category> category = ViewData["Category"] as IEnumerable<NoteMarket.Models.Category>;
     IEnumerable<NoteMarket.Models.Country> country = ViewData["Country"] as IEnumerable<NoteMarket.Models.Country>;
@@ -6,11 +6,12 @@
     IEnumerable<NoteMarket.Models.Rating> rate = ViewData["Rate"] as IEnumerable<NoteMarket.Models.Rating>;
     IEnumerable<NoteMarket.Models.NoteDetail> course = ViewData["Course"] as IEnumerable<NoteMarket.Models.NoteDetail>;
     IEnumerable<NoteMarket.Models.NoteDetail> university = ViewData["University"] as IEnumerable<NoteMarket.Models.NoteDetail>;
-    IEnumerable<NoteMarket.Models.NoteDetail> note = ViewData["Note"] as IEnumerable<NoteMarket.Models.NoteDetail>;
 
     ViewBag.Title = "SearchNotes";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@using PagedList.Mvc;
 <!--Logo-->
 <div class="container">
     <a href="#user" class="navbar-brand smooth-scroll">
@@ -30,7 +31,7 @@
                 <div id="mobile-nav-content">
                     <ul class="nav">
                         <li><a class="smooth-scroll" href="/NoteDetails/SearchNotes">Search Notes</a></li>
-                        <li><a class="smooth-scroll" href="#SellYourNotes">Sell Your Notes</a></li>
+                        <li><a class="smooth-scroll" href="/NoteDetails/MyDownload">Sell Your Notes</a></li>
                         <li><a class="smooth-scroll" href="/Auth/FAQ">FAQ</a></li>
                         <li><a class="smooth-scroll" href="/Auth/ContactUs">ContactUs</a></li>
                         <li> <a class="btn">LogOut</a> </li>
@@ -71,30 +72,32 @@
     <section id="searchnotes">
         <div class="search-under1">
             <h1>Search And Filter notes</h1>
-            <form action="/NoteDetails/SearchNotes" method="post">
+            <form action="/NoteDetails/SearchNotes" method="get" id="searchs">
                 <div class="form-iner8">
-                    <input type="search"style="padding-left:25px;" name="searchn" placeholder="Search notes here" class="form-control" onchange='this.form.submit()'>
+                    <input type="search" style="padding-left:25px;" value="@Request.QueryString["searchn"]" name="searchn" placeholder="Search notes here" class="form-control" onchange='onSubmit()'>
                     <span toggle="#search" class="fa fa-search field-icon1"></span>
-                    <noscript><input type="submit" value="submit"></noscript>
+
                     <div class="container">
                         <div class="row">
                             <div class="col-md-2 col-sm-4">
 
 
-                                <select id="st" name="type">
+                                <select id="st" name="type" onchange="onSubmit()">
                                     <option value="">Select Type</option>
                                     @foreach (NoteMarket.Models.Type type1 in type)
                                     {
                                         <option value="@type1.Type1">@type1.Type1</option>
                                     }
                                 </select>
-
+                                <script>
+                                            $("#st").val("@Request.QueryString["type"]");
+                                </script>
 
                             </div>
-                            <div class="col-md-2 col-sm-4">
+                            <div class="col-md-2 col-sm-4" style="margin-left:-15px !important;">
 
 
-                                <select id="st" name="category">
+                                <select id="st" class="cat" name="category" onchange="onSubmit()">
                                     <option value="">Select category</option>
 
                                     @foreach (NoteMarket.Models.Category category1 in category)
@@ -102,48 +105,65 @@
                                         <option value="@category1.Category1">@category1.Category1</option>
                                     }
                                 </select>
+                                <script>
+                                            $(".cat").val("@Request.QueryString["category"]");
+                                </script>
+
+
                             </div>
                             <div class="col-md-2 col-sm-4">
 
-                                <select name="select University" id="st">
-                                    <option value="st3">Select University</option>
+                                <select name="university" id="st" class="uni" onchange="onSubmit()">
+                                    <option value="">Select University</option>
                                     @foreach (NoteMarket.Models.NoteDetail university1 in university)
                                     {
                                         <option value="@university1.University">@university1.University</option>
                                     }
                                 </select>
-                            </div>
-                            <div class="col-md-2 col-sm-4">
+                                <script>
+                                            $(".uni").val("@Request.QueryString["university"]");
+                                </script>
 
-                                <select name="course" id="st">
-                                    <option>Select Course</option>
+                            </div>
+                            <div class="col-md-2 col-sm-4" style="margin-left:55px !important;">
+
+                                <select name="course" id="st" class="cou" onchange="onSubmit()">
+                                    <option value="">Select Course</option>
                                     @foreach (NoteMarket.Models.NoteDetail course1 in course)
                                     {
                                         <option value="@course1.Course">@course1.Course</option>
                                     }
                                 </select>
+                                <script>
+                                            $(".cou").val("@Request.QueryString["course"]");
+                                </script>
                             </div>
                             <div class="col-md-2 col-sm-4">
 
 
-                                <select id="st" name="country">
+                                <select id="st" name="country" class="con" onchange="onSubmit()">
                                     <option value="">Select country</option>
                                     @foreach (NoteMarket.Models.Country country1 in country)
                                     {
                                         <option value="@country1.Country1">@country1.Country1</option>
                                     }
                                 </select>
-
+                                <script>
+                                            $(".con").val("@Request.QueryString["country"]");
+                                </script>
                             </div>
                             <div class="col-md-2 col-sm-4">
 
-                                <select name="rate" id="st">
+                                <select name="rate" class="rat" id="st" onchange="onSubmit()">
                                     <option value="">Select rating</option>
                                     @foreach (NoteMarket.Models.Rating rating1 in rate)
                                     {
                                         <option value="@rating1.Rate">@rating1.Rate</option>
                                     }
                                 </select>
+                                <script>
+                                            $(".rat").val("@Request.QueryString["rate"]");
+                                </script>
                             </div>
 
                         </div>
@@ -157,27 +177,34 @@
                 <div class="bo">
                     <div class="container">
                         <div class="row">
-                            @foreach (var note1 in note)
+                            @foreach (NoteMarket.Models.NoteDetail note1 in Model)
                             {
+                                if (note1.Status == "Published")
+                                {
                                 <div class="col-md-4 col-sm-6">
-                                    <img src=@Url.Content(@note1.DisplayPic) alt="img">
-                                    <h1 name="note">@note1.NoteTitle</h1>
-                                    <span class="fa fa-university field-icon2"></span>
-                                    <p class="te">@note1.University,@note1.Country</p>
-                                    <span class="fa fa-book field-icon2"></span>
-                                    <p class="te">@note1.NoOfPages</p>
-                                    <span class="fa fa-calendar field-icon2"></span>
-                                    <p class="te">@note1.ApprovedDate</p>
-                                    <span class="fa fa-flag field-icon2"></span>
-                                    <p class="img-rd">5 Users marked this note as inappropriate</p>
-                                    <i class="fa fa-star fil1"></i>
-                                    <i class="fa fa-star fil1"></i>
-                                    <i class="fa fa-star fil1"></i>
-                                    <i class="fa fa-star fil1"></i>
-                                    <i class="fa fa-star fil1"></i>
-                                    <p class="re">100Reviews</p>
+                                    <a href="/NoteDetails/notedetail/@note1.Id">
+
+                                        <img src=@Url.Content(@note1.DisplayPic) alt="img">
+
+                                        <h1 name="note">@note1.NoteTitle</h1>
+                                        <span class="fa fa-university field-icon2"></span>
+                                        <p class="te">@note1.University,@note1.Country</p>
+                                        <span class="fa fa-book field-icon2"></span>
+                                        <p class="te">@note1.NoOfPages</p>
+                                        <span class="fa fa-calendar field-icon2"></span>
+                                        <p class="te">@note1.ApprovedDate</p>
+                                        <span class="fa fa-flag field-icon2"></span>
+                                        <p class="img-rd">5 Users marked this note as inappropriate</p>
+                                        <i class="fa fa-star fil1"></i>
+                                        <i class="fa fa-star fil1"></i>
+                                        <i class="fa fa-star fil1"></i>
+                                        <i class="fa fa-star fil1"></i>
+
+                                        <p class="re">100Reviews</p>
+                                    </a>
                                 </div>
-                            }
+                                    }
+                                }
 
                         </div>
                         <!--slider-->
@@ -187,6 +214,7 @@
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
+
                             <li class="page-item"><a class="page-link btn-pagination" href="#">1</a></li>
                             <li class="page-item"><a class="page-link" href="#">2</a></li>
                             <li class="page-item"><a class="page-link" href="#">3</a></li>
@@ -217,7 +245,16 @@
                             </div>
                         </div>
                     </div>
-    </section>
+                    @if (TempData["Success"] != null)
+                    {
+                        <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
+                    }
 
+</section>
 </body>
+<script>
+    function onSubmit() {
+        document.getElementById('searchs').submit();
+    }
 
+</script>

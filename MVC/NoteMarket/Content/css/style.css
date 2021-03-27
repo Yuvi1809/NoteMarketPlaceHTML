@@ -128,6 +128,17 @@ button{
     background-color:#6255a5;
     color:#fff;
 }
+buttonadd {
+    margin-top: 30px;
+    border-radius: 3px;
+    font-style: sans-serif "Open Sans";
+    font-size: 18px;
+    line-height: 22px;
+    background-color: #6255a5;
+    color: #fff;
+}
+
+
 
 .bottom{
     margin-top: 20px;
@@ -344,14 +355,13 @@ ul.social-list li a {
 }
 /*home*/
 #statment1 {
-
-    background-image: url("~/./images/home/banner-with-overlay.jpg");
+    background-image: url("images/home/banner-with-overlay.jpg");
     background-color: rgba(0, 0, 0, 0.8);
     width: 100%;
     height: 50%;
     position: absolute;
     background-repeat: no-repeat;
-    background-position: upper;
+    background-position:top;
     background-size: cover;
     background-position: center;
 }

@@ -124,10 +124,10 @@
                                         <label>Category*</label>
                                         <select class="form-control" id="category" name="category">
                                             <option value="">Select category</option>
-                                          
-                                            @foreach(NoteMarket.Models.Category category1 in category)
+
+                                            @foreach (NoteMarket.Models.Category category1 in category)
                                             {
-                                            <option value="@category1.Category1">@category1.Category1</option>
+                                                <option value="@category1.Category1">@category1.Category1</option>
                                             }
                                         </select>
                                         <label>Upload Notes*</label><br>
@@ -238,10 +238,10 @@
                         </div>
                     </div>
                 </div>
-                <a class="btn001" href="javascript:$('#AddNotes').submit();" style="margin-left:170px !important">SAVE</a>
-                <a class="btn001" href="javascript:$('#AddNotes').submit();">PUBLISH</a>
+                <button class="btn001" type="submit"  style="margin-left:170px !important"> <b href="/NoteDetails/AddNotes">SAVE</b></button>
+                <a class="btn001">PUBLISH</a>
 
-               
+
                 <div class="container" style="margin-top: 60px">
                     <div class="row">
                         <div class="col-md-6">
@@ -258,9 +258,12 @@
                         </div>
                     </div>
                 </div>
-</form>
+        </form>
     </div>
-   
+    @if (TempData["Success"] != null)
+    {
+        <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
+    }
 </section>
 
 

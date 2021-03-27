@@ -22,6 +22,9 @@
 
     <!-- Responsive css-->
     <link rel="stylesheet" href="~/Content/css/responsive.css">
+    <script src="~/Scripts/js/jquery.js"></script>
+    <link href="~/Content/css/jquery.dataTables.min">
+    <link href="http://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
     <title>@ViewBag.Title</title>
 </head>
 <body>
@@ -33,5 +36,6 @@
     <script src="~/Scripts/js/script.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    @RenderSection("myDataTable",false)
 </body>
 </html>

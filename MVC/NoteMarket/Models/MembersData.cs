@@ -25,7 +25,7 @@ namespace NoteMarket.Models
             this.Date = DateTime.Now;
             this.IsDetailsSubmitted = false;
             this.IsEmailVerified = false;
-          
+            this.IsActive = true;
         }
     
         public int Id { get; set; }

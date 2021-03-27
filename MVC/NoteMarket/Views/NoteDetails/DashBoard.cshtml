@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "DashBoard";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    
+
 }
 
 <!--Logo-->
@@ -76,8 +76,8 @@
 </div>
 
 
-    <section id="dashboard">
-
+<section id="dashboard">
+    <form action="/NoteDetails/DashBoard" method="get" id="searchs">
 
         <div class="fancy-line" style="margin-bottom: 20px;">
             <hr class="line1">
@@ -135,7 +135,7 @@
                         <h4>In Progress Notes</h4>
                     </div>
                     <div class="col-md-6 col-sm-6">
-                        <input type="search" placeholder="Search" class="searchb">
+                        <input type="search" placeholder="Search" class="searchb" value="@Request.QueryString["searchn"]" name="searchn" onchange='onSubmit()'>
                         <i toggle="#search" class="fa fa-search field-icon1"></i>
                         <a class="btn11">SEARCH</a>
                     </div>
@@ -144,7 +144,7 @@
         </div>
         <div class="container table-responsive-sm" style="margin-top: 20px">
             <div class="table-responsive">
-                <table class="table">
+                <table class="table" @*id="tblCourse"*@ style="border: 1px solid #d1d1d1">
                     <tbody>
                         <tr>
                             <th scope="col">ADDED DATE</th>
@@ -155,47 +155,26 @@
                         </tr>
                     </tbody>
                     <tbody>
-                        <tr>
-                            <th scope="row">09-10-2020</th>
-                            <td>Data Science</td>
-                            <td>Science</td>
-                            <td>Draft</td>
-                            <td>
-                                <img src="~/images/images/delete.png" alt="dlt" style="margin-right: 10px">
-                                <img src="~/images/Dashboard/edit.png" alt="edt">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">10-10-2020</th>
-                            <td>Accounts</td>
-                            <td>Commerce</td>
-                            <td>In Review</td>
-                            <td> <img src="~/images/Dashboard/eye.png"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">11-10-2020</th>
-                            <td>Social Studies</td>
-                            <td>Social</td>
-                            <td>Submitted</td>
-                            <td> <img src="~/images/Dashboard/eye.png"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">12-10-2020</th>
-                            <td>AI</td>
-                            <td>IT</td>
-                            <td>Submitted</td>
-                            <td><img src="~/images/Dashboard/eye.png"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">13-10-2020</th>
-                            <td>Lorem</td>
-                            <td>Commerce</td>
-                            <td>Draft</td>
-                            <td>
-                                <img src="~/images/images/delete.png" alt="dlt" style="margin-right: 10px">
-                                <img src="~/images/Dashboard/edit.png">
-                            </td>
-                        </tr>
+
+                        @foreach (NoteMarket.Models.NoteDetail note1 in Model)
+                        {
+                            if (note1.Status == "Drafted")
+                            {
+                            <tr>
+                                <th scope="row">@note1.ApprovedDate</th>
+                                <td>@note1.NoteTitle</td>
+                                <td>@note1.Category</td>
+                                <td>@note1.Status</td>
+
+                                <td>
+                                    <img src="~/images/images/delete.png" alt="dlt" style="margin-right: 10px">
+                                    <a href="/NoteDetails/EditNotes?noteid=@note1.Id"><img src="~/images/Dashboard/edit.png" alt="edt" ></a>
+                                </td>
+
+                            </tr>
+                            }
+                        }
+
                     </tbody>
                 </table>
             </div>
@@ -224,7 +203,7 @@
                         <h4>Publised Notes</h4>
                     </div>
                     <div class="col-md-6 col-sm-6">
-                        <input type="search" placeholder="Search" class="searchb">
+                        <input type="search" placeholder="Search" class="searchb" value="@Request.QueryString["searchn"]" name="searchn" onchange='onSubmit()'>
                         <i toggle="#search" class="fa fa-search field-icon1"></i>
                         <a class="btn11">SEARCH</a>
                     </div>
@@ -233,7 +212,7 @@
         </div>
         <div class="container table-responsive-sm" style="margin-top: 20px">
             <div class="table-responsive">
-                <table class="table" style="border: 1px solid #d1d1d1">
+                <table class="table" style="border: 1px solid #d1d1d1" @*id="tblCourse"*@>
                     <tbody>
                         <tr>
                             <th scope="col">ADDED DATE</th>
@@ -245,48 +224,31 @@
                         </tr>
                     </tbody>
                     <tbody>
+
+                        @foreach (NoteMarket.Models.NoteDetail note1 in Model)
+                        {
                         <tr>
-                            <th scope="row">09-10-2020</th>
-                            <td>Data Science</td>
-                            <td>Science</td>
-                            <td>Paid</td>
-                            <td>$575</td>
+                            <th scope="row">@note1.ApprovedDate</th>
+                            <td>@note1.NoteTitle</td>
+                            <td>@note1.Category</td>
+                            <td>
+                                @if (@note1.SellFor == true)
+                                {
+                                    <p>Paid</p>
+                                }
+                                @if (@note1.SellFor == false)
+                                {
+                                    <p>Free</p>
+                                 }
+                            </td>
+                            <td>@note1.SellPrice</td>
                             <td>
                                 <img src="~/images/Dashboard/eye.png">
                             </td>
+
                         </tr>
-                        <tr>
-                            <th scope="row">10-10-2020</th>
-                            <td>Accounts</td>
-                            <td>Commerce</td>
-                            <td>Free</td>
-                            <td>$0</td>
-                            <td> <img src="~/images/Dashboard/eye.png"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">11-10-2020</th>
-                            <td>Social Studies</td>
-                            <td>Social</td>
-                            <td>Free</td>
-                            <td>$0</td>
-                            <td> <img src="~/images/Dashboard/eye.png"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">12-10-2020</th>
-                            <td>AI</td>
-                            <td>IT</td>
-                            <td>Paid</td>
-                            <td>$3542</td>
-                            <td><img src="~/images/Dashboard/eye.png"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">13-10-2020</th>
-                            <td>Lorem</td>
-                            <td>Commerce</td>
-                            <td>Free</td>
-                            <td>$0</td>
-                            <td> <img src="~/images/Dashboard/eye.png"></td>
-                        </tr>
+                        }
+
                     </tbody>
                 </table>
             </div>
@@ -324,5 +286,19 @@
                 </div>
             </div>
         </div>
-    </section>
+    </form>
+</section>
+@*@section myDataTable{
+    <script src="http://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tblCourse').DataTable();
+        })
+    </script>
+}*@
+<script>
+        function onSubmit() {
+            document.getElementById('searchs').submit();
+        }
 
+    </script>

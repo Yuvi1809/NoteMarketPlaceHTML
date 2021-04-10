@@ -1,0 +1,233 @@
+﻿
+@{
+    IEnumerable<NoteMarket.Models.NoteDetail> noteDetails = ViewData["Notedetail"] as IEnumerable<NoteMarket.Models.NoteDetail>;
+    ViewBag.Title = "PublishNote";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- CSS LINK -->
+<link rel="stylesheet" href="~/Content/addcss/StyleSheet.css">
+
+<!-- Responsive css-->
+<link rel="stylesheet" href="~/Content/addcss/responsive.css">
+    
+
+<section id="publishednotes">
+        <div class="container">
+            <!-- Logo -->
+            <a href="#user" class="navbar-brand smooth-scroll">
+                <img src="~/images/home/logo.png" alt="top logo" class="topi" style="border-radius:0%!important">
+            </a>
+
+            <div class="container">
+                <div class="container">
+                    <nav class="navbar" style="position: absolute">
+                        <div class="navbar-fixed-top">
+                            <!-- Mobile Menu Open Button -->
+                            <span id="mobile-nav-open-btn">&#9776;</span>
+                            <!-- Logo -->
+                            <!-- Mobile Menu -->
+                            <div id="mobile-nav">
+                                <!-- open -->
+                                <span id="mobile-nav-close-btn">&times;</span>
+
+                                <div id="mobile-nav-content">
+                                    <ul class="nav">
+                                        <li><a class="smooth-scroll" href="#SearchNotes">Dashboard</a></li>
+                                        <li><a class="smooth-scroll" href="#SellYourNotes">Notes</a></li>
+                                        <li><a class="smooth-scroll" href="#BuyerRequests">Members</a></li>
+                                        <li><a class="smooth-scroll" href="#FAQ">FAQ</a></li>
+                                        <li><a class="smooth-scroll" href="#contactUs">Rports</a></li>
+                                        <li><a class="smooth-scroll" href="#contactUs">Setting</a></li>
+                                        <li>
+                                            <div class="dropdown">
+                                                <img class="smooth-scroll" style="margin-top: 10px;" src="images/Dashboard/user-img.png" alt="img" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" href="#">Upload Profile</a><br>
+                                                    <a class="dropdown-item" href="#">Change password</a><br>
+                                                    <a class="dropdown-item" href="#">Log Out</a><br>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a class="btn1">
+                                                Logout
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav pull-right">
+                            <li><a class="smooth-scroll" href="#SearchNotes" style="color: black">Dashboard</a></li>
+                            <li><a class="smooth-scroll" href="#SellYourNotes" style="color: black">Notes</a></li>
+                            <li><a class="smooth-scroll" href="#BuyerRequests" style="color: black">Members</a></li>
+                            <li><a class="smooth-scroll" href="#FAQ" style="color: black">FAQ</a></li>
+                            <li><a class="smooth-scroll" href="#contactUs" style="color: black">Rports</a></li>
+                            <li><a class="smooth-scroll" href="#contactUs" style="color: black">Setting</a></li>
+                            <li>
+                                <div class="dropdown">
+                                    <img class="smooth-scroll" style="margin-top: 10px;" src="images/Dashboard/user-img.png" alt="img" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Upload Profile</a><br>
+                                        <a class="dropdown-item" href="#">Change password</a><br>
+                                        <a class="dropdown-item" href="#">Log Out</a><br>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="btn1">
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="fancy-line" style="margin-bottom: 20px;">
+            <hr class="line1">
+        </div>
+        <div class="container">
+
+
+            <h1 style="text-align: left; font-size: 28px">Published Notes</h1>
+            <div class="row" style="margin-top: 20px">
+                <div class="col-md-6">
+
+                    <select id="st" name="seller" onchange="onSubmit()">
+                        <option value="">Seller Name</option>
+                        @foreach (NoteMarket.Models.NoteDetail noteDetail in noteDetails)
+                        {
+                            <option value="@noteDetail.OwnerId">
+
+                                @if (noteDetail.OwnerId == 11)
+                                {<p>Dhruvinsinh</p>}
+                                @if (noteDetail.OwnerId == 10)
+                                {<p>mira</p>}
+
+                            </option>
+                        }
+                    </select>
+                    <script>
+                                            $("#st").val("@Request.QueryString["Notedetail"]");
+                    </script>
+
+                </div>
+                <div class="col-md-3">
+                    <input type="search" placeholder="Search" class="searchb">
+                    <i toggle="#search" class="fa fa-search field-icon1"></i>
+                </div>
+                <div class="col-md-3">
+                    <a class="btn11">SEARCH</a>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table" style="margin-top: 30px;">
+                    <tbody>
+                        <tr>
+                            <th scope="col">SR NO.</th>
+                            <th scope="col">NOTE TITEL</th>
+                            <th scope="col">CATEGORY</th>
+                            <th scope="col">SELL TYPE</th>
+                            <th scope="col">PRICE</th>
+                            <th scope="col">SELLER</th>
+                            <th scope="col"></th>
+                            <th scope="col">PUBLISHED DATE</th>
+                            <th scope="col">APPROVED BY</th>
+                            <th scope="col">NUMBER OF<br> DOWNLOADS</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        
+                            @foreach (NoteMarket.Models.NoteDetail note1 in Model)
+                            {
+                                if (note1.Status == "Published")
+                                {
+                                    <tr>
+                        <th scope="row">1</th>
+                            <td style="color:#6255a5">@note1.NoteTitle</td>
+                            <td>@note1.Category</td>
+                            <td>
+                                @if (@note1.SellFor == true)
+                                {
+                                    <p>Paid</p>
+                                }
+                                @if (@note1.SellFor == false)
+                                {
+                                    <p>Free</p>
+                                }
+                            </td>
+                            <td>$@note1.SellPrice</td>
+                            <td>
+                                @if (note1.OwnerId == 11)
+                                {<p>Dhruvinsinh</p>}
+                                                        @if (note1.OwnerId == 10)
+                                                        {<p>mira</p>}
+                                                    </td>
+                            <td><a href="/NoteDetails/NoteDetail?id=@note1.Id"><img src="~/images/Dashboard/eye.png"></a></td>
+                            <td>@note1.ApprovedDate</td>
+                            <td>arjun</td>
+                            <td>75</td>
+                            <td>
+                                <div class="dropdown">
+                                    <i class="fa fa-ellipsis-v" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    </i>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item1" href="#">Download Notes</a><br>
+                                        <a class="dropdown-item1" href="#">View More Details</a>
+                                        <a class="dropdown-item1" href="#">Unpblish</a>
+                                    </div>
+                                </div>
+                            </td>
+
+                            </tr>
+                                }
+                            }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item"><a class="page-link btn-pagination" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">5</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+        <div class="fancy-line" style="margin-bottom: 20px;">
+            <hr class="line1">
+        </div>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>
+                            Version:1.1.24
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p style="text-align: end">
+                            Copyright &copy; Tatvasoft Allrights Reserved
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </section>
+<script>
+    function onSubmit() {
+        document.getElementById('searchs').submit();
+    }
+
+</script>

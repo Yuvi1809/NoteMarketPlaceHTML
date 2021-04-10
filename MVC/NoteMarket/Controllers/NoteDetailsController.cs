@@ -104,7 +104,7 @@ namespace NoteMarket.Controllers
                 return View();
             }
         }
-        public ActionResult EditNotes(int noteid,AddNotesModel notesModel, HttpPostedFileBase dp, HttpPostedFileBase uploadnote, HttpPostedFileBase notepreview)
+        public ActionResult EditNotes(int noteid,AddNotesModel notesModel)
         {
             if (Session["Id"] != null)
             {
@@ -116,56 +116,29 @@ namespace NoteMarket.Controllers
                     {
                         NoteDetail nd = db.NoteDetails.Where(u => u.Id == noteid).FirstOrDefault();
                         {
-                            //ViewData["Category"] = db.Categories.ToList<Category>();
-                            //ViewData["Type"] = db.Types.ToList();
-                            //ViewData["Country"] = db.Countries.ToList();
+                            ViewData["Category"] = db.Categories.ToList<Category>();
+                            ViewData["Type"] = db.Types.ToList();
+                            ViewData["Country"] = db.Countries.ToList();
+                           
 
-                            //notesModel.category = nd.Category;
-                            //notesModel.country = nd.Country;
+                            
+                            notesModel.country = nd.Country;
+                            notesModel.category = nd.Category;
                             notesModel.coursecode = nd.CourseCode;
                             notesModel.coursename = nd.Course;
                             notesModel.Disc = nd.Description;
                             
                             notesModel.instituename = nd.University;
                             notesModel.Noofpage = nd.NoOfPages;
-                           
+                          
                             notesModel.price = nd.SellPrice;
-                            //notesModel.professor = nd.Professor;
+                            notesModel.professor = nd.Professor;
                             notesModel.Title = nd.NoteTitle;
                             notesModel.type = nd.Type;
-                            string fileName = Path.GetFileName(dp.FileName);
-
-                            notesModel.dppath = "~/images/" + fileName;
-                            fileName = Path.Combine(Server.MapPath("~/images/"), fileName);
-                            dp.SaveAs(fileName);
-
-                            db.NoteDetails.Add(nd);
-
-
-                            string fileName1 = Path.GetFileName(uploadnote.FileName);
-
-
-                            notesModel.uploadpath = "~/images/" + fileName1;
-                            fileName = Path.Combine(Server.MapPath("~/images/"), fileName1);
-                            uploadnote.SaveAs(fileName);
-
                             
-
-                            string fileName2 = Path.GetFileName(notepreview.FileName);
-
-                            notesModel.notepath = "~/images/" + fileName2;
-                            fileName = Path.Combine(Server.MapPath("~/images/"), fileName2);
-                            notepreview.SaveAs(fileName);
-
-                            db.NoteDetails.Add(nd);
-
-                            nd.DisplayPic = notesModel.dppath;
-                            nd.Preview = notesModel.notepath;
-                            nd.note = notesModel.uploadpath;
-                            db.SaveChanges();
-
                             return View(notesModel);
                         }
+                      
                     }
                 }
             }
@@ -175,8 +148,82 @@ namespace NoteMarket.Controllers
             }
         
           }
-       
+        [HttpPost]
+        public ActionResult EditNotes(string noteid,AddNotesModel notesModel, HttpPostedFileBase dp, HttpPostedFileBase uploadnote, HttpPostedFileBase notepreview)
+        {
+            if (Session["Id"] != null)
+            {
+                int id = Convert.ToInt32(Session["Id"].ToString());
+                using (projectEntities1 db = new projectEntities1())
+                {
 
+                    MembersData usr = db.MembersDatas.Where(u => u.Id == id).FirstOrDefault();
+                    {
+                        NoteDetail notes = db.NoteDetails.Where(u=> u.NoteTitle == noteid).FirstOrDefault();
+                        {
+                            
+                            notes.Status = "Inreview";
+
+                            string fileName = Path.GetFileName(dp.FileName);
+
+                            notesModel.dppath = "~/images/" + fileName;
+                            fileName = Path.Combine(Server.MapPath("~/images/"), fileName);
+                            dp.SaveAs(fileName);
+
+
+
+                            string fileName1 = Path.GetFileName(uploadnote.FileName);
+
+
+                            notesModel.uploadpath = "~/images/" + fileName1;
+                            fileName = Path.Combine(Server.MapPath("~/images/"), fileName1);
+                            uploadnote.SaveAs(fileName);
+
+
+                            string fileName2 = Path.GetFileName(notepreview.FileName);
+
+                            notesModel.notepath = "~/images/" + fileName2;
+                            fileName = Path.Combine(Server.MapPath("~/images/"), fileName2);
+                            notepreview.SaveAs(fileName);
+
+                            notes.ApprovedDate = DateTime.Now;
+                            notes.DisplayPic = notesModel.dppath;
+                            notes.Preview = notesModel.notepath;
+                            notes.note = notesModel.uploadpath;
+                            db.SaveChanges();
+                            return RedirectToAction("SearchNotes", "NoteDetails");
+
+                        }
+                    }
+                }
+            }
+            else
+
+            {
+                return View();
+            }
+            
+        }
+        public ActionResult DeleteNotes(int noteid)
+        {
+            if (Session["Id"] != null)
+            {
+                int id = Convert.ToInt32(Session["Id"].ToString());
+                using (projectEntities1 db = new projectEntities1())
+                {
+
+                    MembersData usr = db.MembersDatas.Where(u => u.Id == id).FirstOrDefault();
+                    {
+                        NoteDetail nd = db.NoteDetails.Where(u => u.Id == noteid).FirstOrDefault();
+                        {
+                            db.NoteDetails.Remove(nd);
+                            return View();
+                        }
+                    }
+                }
+            }
+            return View();
+        }
         public ActionResult SearchNotes(string searchn, string country, string type, string category, string university, string course)
         {
             NoteDetail nm = new NoteDetail();
@@ -233,32 +280,32 @@ namespace NoteMarket.Controllers
         public ActionResult DashBoard(string searchn)
         {
             projectEntities1 db = new projectEntities1();
-            List<NoteDetail> notes = db.NoteDetails.ToList();
-            if (!string.IsNullOrEmpty(searchn))
-            {
-                notes = notes.Where(e => e.NoteTitle.ToLower().Contains(searchn.ToLower())).ToList();
-
-            }
-
-            return View(notes);
-        }
-        public ActionResult BuyReq()
-        {
             if (Session["Id"] != null)
             {
+                int id = Convert.ToInt32(Session["Id"].ToString());
 
-                int id1 = Convert.ToInt32(Session["Id"].ToString());
-                using (projectEntities1 db = new projectEntities1())
+              
+                MembersData usr = db.MembersDatas.Where(u => u.Id == id).FirstOrDefault();
                 {
-                    Seller usr = db.Sellers.Where(u => u.Id == id1).FirstOrDefault();
+                    List<NoteDetail> notes = db.NoteDetails.Where(u => u.OwnerId == id).ToList();
 
-                    return View(usr);
+                    {
+                        //List<NoteDetail> notes = db.NoteDetails.ToList();
+                        if (!string.IsNullOrEmpty(searchn))
+                        {
+                            notes = notes.Where(e => e.NoteTitle.ToLower().Contains(searchn.ToLower())).ToList();
+                            return View(notes);
+                        }
+                        
+
+                        return View(notes);
+                    }
+                  
                 }
-            }
-            else
-            {
-                return View();
-            }
+                
+                }
+            return View();
+            
         }
         public ActionResult NoteDetail(int id, Notedetailmodal notedetailmodal)
         {
@@ -311,12 +358,12 @@ namespace NoteMarket.Controllers
                             smtp.Send(mm);
 
                             by.BookId = noteid;
-                            by.ApprovedDate = DateTime.Now;
+                            by.ApprovedDate = null;
                             by.ReqDate = DateTime.Now;
-                            by.IsActive = true;
+                            by.IsActive = false;
                             db.Buyers.Add(by);
                             sl.BookId = noteid;
-                            sl.IsActive = true;
+                            sl.IsActive = false;
                             sl.MemberId = nm.OwnerId;
                             sl.ModifiedBy = id1;
                             sl.ReqDate = DateTime.Now;
@@ -324,7 +371,7 @@ namespace NoteMarket.Controllers
                             db.Sellers.Add(sl);
                             db.SaveChanges();
 
-                            return RedirectToAction("SearchNotes", "NoteDetails");
+                            return RedirectToAction("MyDownload", "NoteDetails");
 
                             }
 
@@ -347,7 +394,7 @@ namespace NoteMarket.Controllers
                                 db.Sellers.Add(sl);
                                 db.SaveChanges();
                                 TempData["Success"] = "Download sucsessfully";
-                                return RedirectToAction("SearchNotes", "NoteDetails");
+                                return RedirectToAction("MyDownload", "NoteDetails");
                         }
 
                         }
@@ -361,7 +408,30 @@ namespace NoteMarket.Controllers
                     return RedirectToAction("Registration", "Auth");
                 }
         }
-
+        public ActionResult Rates(int noteid)
+        {
+            ViewBag.nd = noteid;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Rates(int noteid,RatesModel rt)
+        {
+            Rating r = new Rating();
+            using (projectEntities1 db = new projectEntities1())
+            {
+                NoteDetail nm = db.NoteDetails.Where(u => u.Id == noteid).FirstOrDefault();
+                {
+                    r.Date = DateTime.Now;
+                    r.Description = rt.comment;
+                    r.BuyerId = 10;
+                    r.NoteId = noteid;
+                    r.Rate=Convert.ToInt32(Request.Form["rate"]);
+                    db.Ratings.Add(r);
+                    db.SaveChanges();
+                    return View(); 
+                }
+            }
+        }
         public  ActionResult MyDownload()
         {
             if (Session["Id"] != null)
@@ -370,15 +440,124 @@ namespace NoteMarket.Controllers
                 int id1 = Convert.ToInt32(Session["Id"].ToString());
                 using(projectEntities1 db = new projectEntities1())
                 {
+                    MyDownloadViewModel downloads = new MyDownloadViewModel
+                    {
 
-                    List<Buyer> user = db.Buyers.Where(u => u.MemberId == id1).ToList();
-                    return View(user.ToList());
+                        Downloads = (from buyer in db.Buyers
+
+                                     join member in db.MembersDatas on buyer.MemberId equals member.Id
+                                     join note in db.NoteDetails on buyer.BookId equals note.Id
+                                     where buyer.MemberId == id1
+                                     select new MyDownload
+                                     {
+                                         buyid=buyer.MemberId,
+                                         urnote=note.note,
+                                         id = note.Id,
+                                         category = note.Category,
+                                         emailid = member.EmailId,
+                                         approvedate = buyer.ApprovedDate.ToString(),
+                                         sellprise = note.SellPrice,
+                                         sellfor = note.SellFor,
+                                         title = note.NoteTitle,
+                                         isactive = buyer.IsActive
+                                         
+                                     }
+                                     ).ToList()
+                    };
+
+                    //List<Buyer> user = db.Buyers.Where(u => u.MemberId == id1).ToList();
+                 
+                    return View(downloads);
                 }
             }
             else
             {
                 return View();
             }
+        }
+        
+        
+        public ActionResult BuyReq()
+        {
+            if (Session["Id"] != null)
+            {
+
+                int id1 = Convert.ToInt32(Session["Id"].ToString());
+                using (projectEntities1 db = new projectEntities1())
+                 {
+                    BuyReqView buyReq = new BuyReqView
+                    {
+                        Buy = (from seller in db.Sellers
+
+                           join member in db.MembersDatas on seller.MemberId equals member.Id
+                           join note in db.NoteDetails on seller.BookId equals note.Id
+                           join buyer in db.Buyers on seller.ModifiedBy equals buyer.MemberId
+                           where seller.MemberId == id1
+                           select new BuyReq
+                           {
+                               title = note.NoteTitle,
+                               emailid = buyer.MembersData.EmailId,
+                               course = note.Course,
+                               sellfor = note.SellFor,
+                               sellprice = note.SellPrice,
+                               reqdate = buyer.ReqDate,
+                               aprov=buyer.ApprovedDate.ToString(),
+                               isactive=seller.IsActive,
+                               phoneno = seller.MembersData.PhoneNo,
+                               id=id1
+                              
+                                                             
+                           }
+                           ).ToList()
+                    };
+
+
+                //List<Buyer> buyer = db.Buyers.ToList();
+                return View(buyReq);
+               }
+            }
+            else
+            {
+                return View();
+            }
+    }
+        public ActionResult aprovereq(int sellerid)
+        {
+            
+                projectEntities1 db = new projectEntities1();
+                
+               
+
+            Buyer by = db.Buyers.Where(u => u.MemberId == sellerid).FirstOrDefault();
+            {
+                by.IsActive = true;
+                by.ApprovedDate = DateTime.Now;
+                NoteDetail nm = db.NoteDetails.Where(u => u.Id == by.BookId).FirstOrDefault();
+                {
+                    Seller usr = db.Sellers.Where(u => u.ModifiedBy == by.MemberId).FirstOrDefault();
+                    {
+                        usr.IsActive = true;
+                        usr.ApprovedDate = DateTime.Now;
+
+                        db.SaveChanges();
+                    }
+                }
+            }
+            return RedirectToAction("Registration", "Auth");
+
+        }
+        public ActionResult MyRejected()
+        {
+            projectEntities1 db = new projectEntities1();
+            List<NoteDetail> notes = db.NoteDetails.ToList();
+            if (Session["Id"] != null)
+            {
+
+                int id1 = Convert.ToInt32(Session["Id"].ToString());
+
+                return View(notes);
+            }
+            return View();       
         }
         public ActionResult MySold()
         {
@@ -388,9 +567,30 @@ namespace NoteMarket.Controllers
                 int id1 = Convert.ToInt32(Session["Id"].ToString());
                 using (projectEntities1 db = new projectEntities1())
                 {
-                    List<Seller> user = db.Sellers.Where(u => u.MemberId == id1).ToList();
+                    //List<Seller> user = db.Sellers.Where(u => u.MemberId == id1).ToList();
+                    MysoldViewModel sold = new MysoldViewModel
+                    {
+                        Solds = (from seller in db.Sellers
 
-                    return View(user.ToList());
+                                 join member in db.MembersDatas on seller.MemberId equals member.Id
+                                 join note in db.NoteDetails on seller.BookId equals note.Id
+                                 join buyer in db.Buyers on seller.ModifiedBy equals buyer.MemberId
+                                 where seller.MemberId == id1
+                                 select new MySold
+                                 {
+                                        title = note.NoteTitle,
+                                        emailid=buyer.MembersData.EmailId,
+                                        course=note.Course,
+                                        phoneno=buyer.MembersData.PhoneNo,
+                                        sellfor=note.SellFor,
+                                        sellprice=note.SellPrice,
+                                        approved=seller.ApprovedDate,
+                                         isactive = seller.IsActive
+                                 }
+                                 ).ToList()
+                    };
+                
+                    return View(sold);
                 }
             }
             else

@@ -1,7 +1,6 @@
-﻿@model NoteMarket.Models.MyDownloadViewModel
+﻿
 @{
-   
-    ViewBag.Title = "MyDownload";
+    ViewBag.Title = "MyRejected";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -12,7 +11,7 @@
     </a>
     <div class="container">
         <nav class="navbar" style="position: absolute">
-            <div class="navbar-fixed-top">
+            <div class=" navbar-fixed-top">
                 <!-- Mobile Menu Open Button -->
                 <span id="mobile-nav-open-btn">&#9776;</span>
                 <!-- Logo -->
@@ -42,7 +41,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li> <a class="btn">Logout</a> </li>
+                            <li> <a class="btn">LogOut</a> </li>
                         </ul>
                     </div>
                 </div>
@@ -69,16 +68,13 @@
                         </div>
                     </div>
                 </li>
-                <li> <a class="btn">Logout</a> </li>
+                <li> <a class="btn">LogOut</a> </li>
             </ul>
         </div>
     </div>
 </div>
-</head>
 
-<body>
-    <section id="mydownload">
-
+    <section id="myrejected">
         <div class="fancy-line" style="margin-bottom: 20px;">
             <hr class="line1">
         </div>
@@ -86,7 +82,7 @@
             <div class="container" style="margin-top: 60px;">
                 <div class="row">
                     <div class="col-md-6 col-sm-6">
-                        <h4>My Downloads</h4>
+                        <h4>My Rejected Notes</h4>
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <input type="search" placeholder="Search" class="searchb">
@@ -96,135 +92,86 @@
                 </div>
             </div>
         </div>
-        <div class="container table-responsive-sm" style="margin-top: 20px">
+        <div class="container" style="margin-top: 20px">
             <div class="table-responsive">
-                <table class="table" style="border: 1px solid #d1d1d1">
+                <table class="table">
                     <tbody>
                         <tr>
                             <th scope="col">SR NO.</th>
                             <th scope="col">Note TITLE</th>
                             <th scope="col">CATEGORY</th>
-                            <th scope="col">BUYER</th>
-                            <th scope="col">SELL TYPE</th>
-                            <th scope="col">PRICE</th>
-                            <th scope="col">DOWNLOAD DATE/TIME</th>
+                            <th scope="col">REMARKS</th>
+                            <th scope="col">CLONE</th>
                             <th scope="col"> </th>
                             <th scope="col"> </th>
                         </tr>
                     </tbody>
                     <tbody>
-                        @foreach (var b in Model.Downloads)
+                        @foreach (NoteMarket.Models.NoteDetail note1 in Model)
                         {
-                            if (b.approvedate != "")
+                            if (note1.Status == "Rejected")
                             {
+
                                 <tr>
                                     <th scope="row">1</th>
+                                    <td>@note1.NoteTitle</td>
+                                    <td>@note1.Category</td>
+                                    <td>@note1.Description </td>
+                                    <td>Clone</td>
 
-                                    <td>@b.title</td>
-                                    <td>@b.category</td>
-                                    <td>@b.emailid</td>
-                                    <td>
-                                        @if (b.sellfor == true)
-                                        {
-                                            <p>Paid</p>
-                                        }
-                                        @if (b.sellfor == false)
-                                        {
-                                            <p>Free</p>
-                                        }
-                                    </td>
-                                    <td>$@b.sellprise</td>
-                                    <td> @b.approvedate</td>
-                                    <td>
-                                        <img src="~/images/Dashboard/eye.png">
-                                    </td>
                                     <td>
                                         <div class="dropdown">
                                             <i class="fa fa-ellipsis-v" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             </i>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item1" href=@b.urnote.Substring(1)>Download Notes</a><br>
-                                                <a class="dropdown-item1" href="/NoteDetails/Rates?noteid=@b.id">Add Review/Feedback</a><br>
-                                                <a class="dropdown-item1" href="#">Rpoet as Inaprropriate</a><br>
+                                                <a class="dropdown-item1" href="#">Download Notes</a><br>
+
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
                             }
-                        }
-                    </tbody>
+                        }   </tbody>
                 </table>
             </div>
-            
-                @*<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <a data-dismiss="modal" aria-label="Close">
-                                    <span class="close1" aria-hidden="true">&times;</span>
-                                </a>
-
-                                <h4>Add Review</h4>
-
-                                <div class="rate">
-                                    <input type="radio" id="star5" name="rate" value="5" />
-                                    <label for="star5" title="text">5 stars</label>
-                                    <input type="radio" id="star4" name="rate" value="4" />
-                                    <label for="star4" title="text">4 stars</label>
-                                    <input type="radio" id="star3" name="rate" value="3" />
-                                    <label for="star3" title="text">3 stars</label>
-                                    <input type="radio" id="star2" name="rate" value="2" />
-                                    <label for="star2" title="text">2 stars</label>
-                                    <input type="radio" id="star1" name="rate" value="1" />
-                                    <label for="star1" title="text">1 star</label>
-                                </div>
-                                <div class="underrating" style="margin-bottom: 30px">
-                                    <label>Comments *</label><br>
-                                   
-                                    <input type="text" class="form-control-13">
-                                    <a class="btn-rat" href="javascript:$('#Rates').submit();">SUBMIT</a>
-                                </div>
-                            </div>
-                        </div>
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link btn-pagination" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+            <hr class="line1" style="margin-top: 25px;">
+            <div class="container" style="margin-top: 60px">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>
+                            Copyright &copy; Tatvasoft Allrights Reserved
+                        </p>
                     </div>
-                </div>*@
-          
-        </div>
-
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link btn-pagination" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">5</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-        <hr class="line1" style="margin-top: 25px;">
-        <div class="container" style="margin-top: 60px">
-            <div class="row">
-                <div class="col-md-6">
-                    <p>
-                        Copyright &copy; Tatvasoft Allrights Reserved
-                    </p>
-                </div>
-                <div class="col-md-6">
-                    <ul class="social-list pull-righ">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                    </ul>
+                    <div class="col-md-6">
+                        <ul class="social-list pull-righ">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
 
+
+
+        </div>
+    </section>
 
 

@@ -24,7 +24,8 @@ namespace NoteMarket.Models
             this.Sellers = new HashSet<Seller>();
             this.Date = DateTime.Now;
             this.IsDetailsSubmitted = false;
-            this.IsEmailVerified = false;
+            this.IsEmailVerified = true;
+            
             this.IsActive = true;
         }
     

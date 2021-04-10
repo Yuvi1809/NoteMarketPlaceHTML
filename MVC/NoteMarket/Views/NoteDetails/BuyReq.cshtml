@@ -1,4 +1,4 @@
-﻿@Model NoteMarket.Models.Seller
+﻿@model NoteMarket.Models.BuyReqView
 @{
     ViewBag.Title = "BuyReq";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -74,276 +74,121 @@
     </div>
 </div>
 
-    <section id="buyerreq">
-        <div class="fancy-line" style="margin-bottom: 20px;">
-            <hr class="line1">
-        </div>
-        <div class="dash5">
-            <div class="container" style="margin-top: 60px;">
-                <div class="row">
-                    <div class="col-md-6 col-sm-6">
-                        <h4>Buyer Requests</h4>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <input type="search" placeholder="Search" class="searchb">
-                        <i toggle="#search" class="fa fa-search field-icon1"></i>
-                        <a class="btn11">SEARCH</a>
-                    </div>
+<section id="buyerreq">
+    <div class="fancy-line" style="margin-bottom: 20px;">
+        <hr class="line1">
+    </div>
+    <div class="dash5">
+        <div class="container" style="margin-top: 60px;">
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <h4>Buyer Requests</h4>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <input type="search" placeholder="Search" class="searchb">
+                    <i toggle="#search" class="fa fa-search field-icon1"></i>
+                    <a class="btn11">SEARCH</a>
                 </div>
             </div>
         </div>
-        <div class="container" style="margin-top: 20px">
-            <div class="table-responsive">
-                <table class="table">
-                    <tbody>
+    </div>
+    <div class="container" style="margin-top: 20px">
+        <div class="table-responsive">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th scope="col">SR NO.</th>
+                        <th scope="col">Note TITLE</th>
+                        <th scope="col">CATEGORY</th>
+                        <th scope="col">BUYER</th>
+                        <th scope="col">PHONE NO</th>
+                        <th scope="col">SELL TYPE</th>
+                        <th scope="col">PRICE</th>
+                        <th scope="col">DOWNLOADED DATE/TIME </th>
+                        <th scope="col"> </th>
+                        <th scope="col"> </th>
+                    </tr>
+                </tbody>
+                <tbody>
+
+                    @foreach (var b in Model.Buy)
+                    {
+                        if (b.aprov == "")
+                        {
                         <tr>
-                            <th scope="col">SR NO.</th>
-                            <th scope="col">Note TITLE</th>
-                            <th scope="col">CATEGORY</th>
-                            <th scope="col">BUYER</th>
-                            <th scope="col">PHONE NO</th>
-                            <th scope="col">SELL TYPE</th>
-                            <th scope="col">PRICE</th>
-                            <th scope="col">DOWNLOADED DATE/TIME </th>
-                            <th scope="col"> </th>
-                            <th scope="col"> </th>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr>
-                            @*@foreach (NoteMarket.Models.Seller s1 in Model) 
-                            {*@
-                             if (Model.NoteDetail.SellFor == true)
-                             { <th scope="row">1</th>
-                            <td style="color: #6255a5">@Model.NoteDetail.NoteTitle</td>
-                            <td>@Model.NoteDetail.Course</td>
-                            <td>@Model.MembersData.EmailId</td>
-                            <td>@Model.MembersData.PhoneNo</td>
-                            <td>@Model.NoteDetail.SellFor</td>
-                            <td>@Model.NoteDetail.SellPrice</td>
-                            <td>@Model.NoteDetail.ApprovedDate </td>
+                            <th scope="row">1</th>
+                            <td style="color: #6255a5">@b.title</td>
+                            <td>@b.course</td>
+                            <td>@b.emailid</td>
+                            <td>@b.phoneno</td>
+                            <td>
+                                @if (b.sellfor == true)
+                                {
+                                    <p>Paid</p>
+                                }
+                                @if (b.sellfor == false)
+                                {
+                                    <p>Free</p>
+                                 }
+                            </td>
+                            <td>@b.sellprice</td>
+                            <td>@b.reqdate </td>
                             <td><img src="/images/Dashboard/eye.png"></td>
                             <td>
                                 <div class="dropdown">
+                                    <i class="fa fa-ellipsis-v" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    </i>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item1" href="#">Allow Download</a><br>
-
+                                        <a class="dropdown-item1" href="/NoteDetails/aprovereq?sellerid=@b.id">Allow Download</a><br>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>}
-                             }
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td style="color: #6255a5">Accounts</td>
-                            <td>Commerce</td>
-                            <td>testing123@gmail.com</td>
-                            <td>+91 9874563527</td>
-                            <td>free</td>
-                            <td>$0</td>
-                            <td>27 nov 2020, 11:24:34 </td>
-                            <td><img src="~/images/Dashboard/eye.png"></td>
-                            <td>
-                                <div class="dropdown">
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item1" href="#">Allow Download</a><br>
-
-                                    </div>
-                                </div>
                             </td>
                         </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td style="color: #6255a5">Social Studies</td>
-                            <td>Social</td>
-                            <td>testing123@gmail.com</td>
-                            <td>+91 9874563527</td>
-                            <td>free</td>
-                            <td>$0</td>
-                            <td>27 nov 2020, 11:24:34 </td>
-                            <td><img src="~/images/Dashboard/eye.png"></td>
-                            <td>
-                                <div class="dropdown">
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item1" href="#">Allow Download</a><br>
+                        }
+                    }
 
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td style="color: #6255a5">AI</td>
-                            <td>It</td>
-                            <td>testing123@gmail.com</td>
-                            <td>+91 9874563527</td>
-                            <td>paid</td>
-                            <td>$158</td>
-                            <td>27 nov 2020, 11:24:34 </td>
-                            <td><img src="~/images/Dashboard/eye.png"></td>
-                            <td>
-                                <div class="dropdown">
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item1" href="#">Allow Download</a><br>
 
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">5</th>
-                            <td style="color: #6255a5">Lorem</td>
-                            <td>Lorem</td>
-                            <td>testing123@gmail.com</td>
-                            <td>+91 9874563527</td>
-                            <td>free</td>
-                            <td>$0</td>
-                            <td>27 nov 2020, 11:24:34 </td>
-                            <td><img src="~/images/Dashboard/eye.png"></td>
-                            <td>
-                                <div class="dropdown">
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item1" href="#">Allow Download</a><br>
 
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">6</th>
-                            <td style="color: #6255a5">Data Science</td>
-                            <td>Science</td>
-                            <td>testing123@gmail.com</td>
-                            <td>+91 9874563527</td>
-                            <td>paid</td>
-                            <td>$250</td>
-                            <td>27 nov 2020, 11:24:34 </td>
-                            <td><img src="~/images/Dashboard/eye.png"></td>
-                            <td>
-                                <div class="dropdown">
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item1" href="#">Allow Download</a><br>
-
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">7</th>
-                            <td style="color: #6255a5">Accounts</td>
-                            <td>Commerce</td>
-                            <td>testing123@gmail.com</td>
-                            <td>+91 9874563527</td>
-                            <td>free</td>
-                            <td>$0</td>
-                            <td>27 nov 2020, 11:24:34 </td>
-                            <td><img src="~/images/Dashboard/eye.png"></td>
-                            <td>
-                                <div class="dropdown">
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item1" href="#">Allow Download</a><br>
-
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">8</th>
-                            <td style="color: #6255a5">Social Studies</td>
-                            <td>Social</td>
-                            <td>testing123@gmail.com</td>
-                            <td>+91 9874563527</td>
-                            <td>free</td>
-                            <td>$0</td>
-                            <td>27 nov 2020, 11:24:34 </td>
-                            <td><img src="~/images/Dashboard/eye.png"></td>
-                            <td>
-                                <div class="dropdown">
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item1" href="#">Allow Download</a><br>
-
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">9</th>
-                            <td style="color: #6255a5">AI</td>
-                            <td>It</td>
-                            <td>testing123@gmail.com</td>
-                            <td>+91 9874563527</td>
-                            <td>paid</td>
-                            <td>$158</td>
-                            <td>27 nov 2020, 11:24:34 </td>
-                            <td><img src="~/images/Dashboard/eye.png"></td>
-                            <td>
-                                <div class="dropdown">
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item1" href="#">Allow Download</a><br>
-
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">10</th>
-                            <td style="color: #6255a5">Lorem</td>
-                            <td>Lorem</td>
-                            <td>testing123@gmail.com</td>
-                            <td>+91 9874563527</td>
-                            <td>free</td>
-                            <td>$0</td>
-                            <td>27 nov 2020, 11:24:34 </td>
-                            <td><img src="~/images/Dashboard/eye.png"></td>
-                            <td>
-                                <div class="dropdown">
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item1" href="#">Allow Download</a><br>
-
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
                     </tbody>
-                </table>
-            </div>
-            <ul class="pagination">
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li class="page-item"><a class="page-link btn-pagination" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-            <hr class="line1" style="margin-top: 25px;">
-            <div class="container" style="margin-top: 60px">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p>
-                            Copyright &copy; Tatvasoft Allrights Reserved
-                        </p>
-                    </div>
-                    <div class="col-md-6">
-                        <ul class="social-list pull-righ">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
-                    </div>
+            </table>
+        </div>
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item"><a class="page-link btn-pagination" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">5</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+        <hr class="line1" style="margin-top: 25px;">
+        <div class="container" style="margin-top: 60px">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        Copyright &copy; Tatvasoft Allrights Reserved
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <ul class="social-list pull-righ">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
                 </div>
             </div>
-
-
-
         </div>
-    </section>
+
+
+
+    </div>
+</section>
 

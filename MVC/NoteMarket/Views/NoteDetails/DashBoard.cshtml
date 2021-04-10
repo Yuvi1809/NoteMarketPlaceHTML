@@ -23,11 +23,10 @@
 
                     <div id="mobile-nav-content">
                         <ul class="nav">
-                            <li><a class="smooth-scroll" href="#SearchNotes">Search Notes</a></li>
-                            <li><a class="smooth-scroll" href="#SellYourNotes">Sell Your Notes</a></li>
-                            <li><a class="smooth-scroll" href="#BuyerRequests">Buyer Requests</a></li>
-                            <li><a class="smooth-scroll" href="#FAQ">FAQ</a></li>
-                            <li><a class="smooth-scroll" href="#contactUs">ContactUs</a></li>
+                            <li><a class="smooth-scroll" href="/NoteDetails/SearchNotes">Search Notes</a></li>
+                            <li><a class="smooth-scroll" href="/NoteDetails/DashBoard">Sell Your Notes</a></li>
+                            <li><a class="smooth-scroll" href="/Auth/FAQ">FAQ</a></li>
+                            <li><a class="smooth-scroll" href="/Auth/ContactUs">ContactUs</a></li>
                             <li>
                                 <div class="dropdown">
                                     <img class="smooth-scroll  dropdown-toggle" src="~/images/Dashboard/user-img.png" data-toggle="dropdown" alt="img">
@@ -51,7 +50,7 @@
         <div class="collapse navbar-collapse" style="margin-top: 10px;">
             <ul class="nav navbar-nav pull-right">
                 <li><a class="smooth-scroll" href="/NoteDetails/SearchNotes">Search Notes</a></li>
-                <li><a class="smooth-scroll" href="#SellYourNotes">Sell Your Notes</a></li>
+                <li><a class="smooth-scroll" href="/NoteDetails/DashBoard">Sell Your Notes</a></li>
                 <li><a class="smooth-scroll" href="/NoteDetails/BuyReq">Buyer Requests</a></li>
                 <li><a class="smooth-scroll" href="/Auth/FAQ">FAQ</a></li>
                 <li><a class="smooth-scroll" href="/Auth/ContactUs">ContactUs</a></li>
@@ -61,10 +60,10 @@
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item1" href="#">My Profile</a><br>
-                            <a class="dropdown-item1" href="#">My Download</a><br>
-                            <a class="dropdown-item1" href="#">My Sold Notes</a><br>
-                            <a class="dropdown-item1" href="#">My Rejected Notes</a><br>
-                            <a class="dropdown-item1" href="#">Change Password</a><br>
+                            <a class="dropdown-item1" href="/NoteDetails/MyDownload">My Download</a><br>
+                            <a class="dropdown-item1" href="/NoteDetails/MySold">My Sold Notes</a><br>
+                            <a class="dropdown-item1" href="/NoteDetails/MyRejected">My Rejected Notes</a><br>
+                            <a class="dropdown-item1" href="/Auth/ChangePass">Change Password</a><br>
                             <a class="dropdown-item1" href="#">Logout</a>
                         </div>
                     </div>
@@ -104,25 +103,25 @@
                                 <h1 style="margin-top: 5px;">My Earning</h1>
                             </div>
                             <div class="col-md-4 col-sm-4">
-                                <h1>100</h1>
-                                <h5 style="text-align: center">Number of ntes sold</h5>
+                                <h1>02</h1>
+                                <h5 style="text-align: center">Number of notes sold</h5>
                             </div>
                             <div class="col-md-4 col-sm-4">
-                                <h1>$10,00,000</h1>
+                                <h1>$00</h1>
                                 <h5 style="text-align: center">Money Earned</h5>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-4" style=" border: 1px solid #d1d1d1">
-                        <h1>38</h1>
+                        <h1>02</h1>
                         <h5 style="text-align: center">My Downloads</h5>
                     </div>
                     <div class="col-md-2 col-sm-4" style=" border: 1px solid #d1d1d1;">
-                        <h1>12</h1>
+                        <h1>00</h1>
                         <h5 style="text-align: center;">My Rejected Notes</h5>
                     </div>
                     <div class="col-md-2 col-sm-4" style="border: 1px solid #d1d1d1;">
-                        <h1>102</h1>
+                        <h1>01</h1>
                         <h5 style="text-align: center">Buyer Requests</h5>
                     </div>
                 </div>
@@ -160,18 +159,20 @@
                         {
                             if (note1.Status == "Drafted")
                             {
-                            <tr>
-                                <th scope="row">@note1.ApprovedDate</th>
-                                <td>@note1.NoteTitle</td>
-                                <td>@note1.Category</td>
-                                <td>@note1.Status</td>
+                                <tr>
+                                    <th scope="row">@note1.ApprovedDate</th>
+                                    <td>@note1.NoteTitle</td>
+                                    <td>@note1.Category</td>
+                                    <td>@note1.Status</td>
 
-                                <td>
-                                    <img src="~/images/images/delete.png" alt="dlt" style="margin-right: 10px">
-                                    <a href="/NoteDetails/EditNotes?noteid=@note1.Id"><img src="~/images/Dashboard/edit.png" alt="edt" ></a>
-                                </td>
+                                    <td>
+                                        <a href="/NoteDetails/DeleteNote?noteid=@note1.Id">
+                                            <img src="~/images/images/delete.png" alt="dlt" style="margin-right: 10px">
+                                        </a>
+                                        <a href="/NoteDetails/EditNotes?noteid=@note1.Id"><img src="~/images/Dashboard/edit.png" alt="edt"></a>
+                                    </td>
 
-                            </tr>
+                                </tr>
                             }
                         }
 
@@ -196,6 +197,7 @@
                 </li>
             </ul>
         </div>
+    
         <div class="dash5">
             <div class="container" style="margin-top: 60px;">
                 <div class="row">
@@ -227,26 +229,29 @@
 
                         @foreach (NoteMarket.Models.NoteDetail note1 in Model)
                         {
-                        <tr>
-                            <th scope="row">@note1.ApprovedDate</th>
-                            <td>@note1.NoteTitle</td>
-                            <td>@note1.Category</td>
-                            <td>
-                                @if (@note1.SellFor == true)
-                                {
-                                    <p>Paid</p>
-                                }
-                                @if (@note1.SellFor == false)
-                                {
-                                    <p>Free</p>
-                                 }
-                            </td>
-                            <td>@note1.SellPrice</td>
-                            <td>
-                                <img src="~/images/Dashboard/eye.png">
-                            </td>
+                            if (note1.Status == "Published")
+                            {
+                                <tr>
+                                    <th scope="row">@note1.ApprovedDate</th>
+                                    <td>@note1.NoteTitle</td>
+                                    <td>@note1.Category</td>
+                                    <td>
+                                        @if (@note1.SellFor == true)
+                                        {
+                                            <p>Paid</p>
+                                        }
+                                        @if (@note1.SellFor == false)
+                                        {
+                                            <p>Free</p>
+                                        }
+                                    </td>
+                                    <td>@note1.SellPrice</td>
+                                    <td>
+                                        <img src="~/images/Dashboard/eye.png">
+                                    </td>
 
-                        </tr>
+                                </tr>
+                            }
                         }
 
                     </tbody>
@@ -289,16 +294,16 @@
     </form>
 </section>
 @*@section myDataTable{
-    <script src="http://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#tblCourse').DataTable();
-        })
-    </script>
-}*@
+        <script src="http://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#tblCourse').DataTable();
+            })
+        </script>
+    }*@
 <script>
-        function onSubmit() {
-            document.getElementById('searchs').submit();
-        }
+    function onSubmit() {
+        document.getElementById('searchs').submit();
+    }
 
-    </script>
+</script>

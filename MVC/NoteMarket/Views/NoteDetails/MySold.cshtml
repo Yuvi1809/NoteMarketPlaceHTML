@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NoteMarket.Models.Seller>
+﻿@model NoteMarket.Models.MysoldViewModel
 @{
     ViewBag.Title = "MySold";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -108,26 +108,28 @@
                     </tr>
                 </tbody>
                 <tbody>
-                    @foreach (NoteMarket.Models.Seller s in Model)
+                    @foreach (var s in Model.Solds)
                     {
+                        if (s.isactive == true)
+                        {
                         <tr>
                             <th scope="row">1</th>
-                            <td>@s.NoteDetail.NoteTitle</td>
-                            <td>@s.NoteDetail.Course</td>
-                            <td>@s.MembersData.EmailId</td>
-                            <td>@s.MembersData.PhoneNo</td>
+                            <td>@s.title</td>
+                            <td>@s.course</td>
+                            <td>@s.emailid</td>
+                            <td>@s.phoneno</td>
                             <td>
-                                @if (s.NoteDetail.SellFor == true)
+                                @if (s.sellfor == true)
                                 {
                                     <p>Paid</p>
                                 }
-                                @if (s.NoteDetail.SellFor == false)
+                                @if (s.sellfor == false)
                                 {
                                     <p>Free</p>
                                 }
                             </td>
-                            <td>@s.NoteDetail.SellPrice</td>
-                            <td>@s.ApprovedDate</td>
+                            <td>@s.sellprice</td>
+                            <td>@s.approved</td>
                             <td>
                                 <img src="~/images/Dashboard/eye.png">
                             </td>
@@ -142,8 +144,9 @@
                                 </div>
                             </td>
                         </tr>
+                        }
                     }
-                    </tbody>
+                </tbody>
             </table>
         </div>
         <ul class="pagination">

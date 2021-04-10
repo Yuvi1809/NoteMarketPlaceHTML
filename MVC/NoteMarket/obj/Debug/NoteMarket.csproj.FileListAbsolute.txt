@@ -76,7 +76,6 @@ C:\Users\Dhruvin\Desktop\NoteMarket\bin\System.Web.WebPages.Razor.xml
 C:\Users\Dhruvin\Desktop\NoteMarket\bin\Newtonsoft.Json.xml
 C:\Users\Dhruvin\Desktop\NoteMarket\bin\Antlr3.Runtime.pdb
 C:\Users\Dhruvin\Desktop\NoteMarket\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Dhruvin\Desktop\NoteMarket\obj\Debug\NoteMarket.csprojAssemblyReference.cache
 C:\Users\Dhruvin\Desktop\NoteMarket\obj\Debug\NoteMarket.csproj.CoreCompileInputs.cache
 C:\Users\Dhruvin\Desktop\NoteMarket\obj\Debug\NoteMarket.csproj.CopyComplete
 C:\Users\Dhruvin\Desktop\NoteMarket\obj\Debug\NoteMarket.dll
@@ -85,3 +84,4 @@ C:\Users\Dhruvin\Desktop\NoteMarket\bin\PagedList.dll
 C:\Users\Dhruvin\Desktop\NoteMarket\bin\PagedList.Mvc.dll
 C:\Users\Dhruvin\Desktop\NoteMarket\bin\PagedList.xml
 C:\Users\Dhruvin\Desktop\NoteMarket\bin\PagedList.Mvc.xml
+C:\Users\Dhruvin\Desktop\NoteMarket\obj\Debug\NoteMarket.csprojAssemblyReference.cache

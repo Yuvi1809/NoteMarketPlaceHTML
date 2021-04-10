@@ -38,12 +38,23 @@ namespace NoteMarket.Controllers
             using (projectEntities1 db = new projectEntities1())
             {
 
-                MembersData usr = db.MembersDatas.Where(u => u.EmailId == ml.EmailId && u.Password == ml.Password).FirstOrDefault();
+                MembersData usr = db.MembersDatas.Where(u => u.EmailId == ml.EmailId && u.Password == ml.Password ).FirstOrDefault();
                 if (usr != null)
                 {
+                    
+                    
                     Session["Id"] = usr.Id;
                     TempData["Success"] = "Loggin Successfully!";
-                    return RedirectToAction("SearchNotes", "NoteDetails");
+                    if (usr.ModifiedBy == 1)
+                    {
+                        return RedirectToAction("Dashboard", "Admin");
+
+                    }
+                    else
+                    {
+                        return RedirectToAction("SearchNotes", "NoteDetails");
+                    }
+                   
                 }
                 else
                 {
@@ -94,6 +105,7 @@ namespace NoteMarket.Controllers
                 smtp.UseDefaultCredentials = false;
                 smtp.Credentials = new NetworkCredential(fromemail.Address, "Note@tatva");
 
+                
                 smtp.Send(mm);
                 TempData["Success"] = "Registration Successfully Done!";
                return RedirectToAction("Login", "Auth");
@@ -130,7 +142,7 @@ namespace NoteMarket.Controllers
                     MailMessage mm = new MailMessage("noteamarketplace@gmail.com", ml.EmailId);
                     mm.Subject = "New temporory password has been genrated for you";
                     mm.IsBodyHtml = true;
-                    mm.Body = "<div>Hello,</div> <div>We have genrated a new password for you .</div> <div>Password : notemarketplace@123<div>------</div><div> Regards,<div> NoteMarketplace</div>";
+                    mm.Body = "<div>Hello,</div> <div>We have genrated a new password for you .</div> <div>Password :Note@123<div>------</div><div> Regards,<div> NoteMarketplace</div>";
 
 
                     SmtpClient smtp = new SmtpClient();
